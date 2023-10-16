@@ -6,7 +6,8 @@ export const Container = styled.div`
 
 export const BcgContainer = styled.div`
   height: 770px;
-   width: 100%;
+  width: 100%;
+  background: black;
 `;
 
 export const MainPoster = styled.div`
@@ -14,24 +15,83 @@ export const MainPoster = styled.div`
    height: 770px;
    width: 100%;
    color: white;
-   background-image:
-   linear-gradient(270deg, rgb(0, 0, 0) 14.11%, rgba(0, 0, 0, 0.875) 15.08%, rgba(0, 0, 0, 0.72) 16.51%, rgba(0, 0, 0, 0.294) 19.99%, rgba(0, 0, 0, 0.16) 21.88%, rgba(0, 0, 0, 0) 25.68%), linear-gradient(90deg, rgb(0, 0, 0) 13.6%, rgba(0, 0, 0, 0.984) 14.58%, rgba(0, 0, 0, 0.97) 15.44%, rgba(0, 0, 0, 0.867) 16.3%, rgba(0, 0, 0, 0.23) 22.87%, rgba(0, 0, 0, 0) 26.64%), linear-gradient(rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0.69) 4.66%, rgba(0, 0, 0, 0.44) 9.34%, rgba(0, 0, 0, 0.208) 15.16%, rgba(0, 0, 0, 0) 24.22%), linear-gradient(189.44deg, rgba(0, 0, 0, 0) 58.48%, rgba(0, 0, 0, 0.106) 63.17%, rgba(0, 0, 0, 0.235) 68.85%, rgba(0, 0, 0, 0.494) 78.08%, rgba(0, 0, 0, 0.74) 85.86%, rgb(0, 0, 0) 92.87%), 
-    url("${({ url }) => url}")
-    ;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    position: relative;
+   background-image: linear-gradient(
+      270deg,
+      #000000 14.11%,
+      rgba(0, 0, 0, 0.873268) 15.08%,
+      rgba(0, 0, 0, 0.720529) 16.51%,
+      rgba(0, 0, 0, 0.294577) 19.99%,
+      rgba(0, 0, 0, 0.159921) 21.88%,
+      rgba(0, 0, 0, 0) 25.68%
+    ),
+    linear-gradient(
+      90deg,
+      #000000 13.6%,
+      rgba(0, 0, 0, 0.984059) 14.58%,
+      rgba(0, 0, 0, 0.967732) 15.44%,
+      rgba(0, 0, 0, 0.865569) 16.3%,
+      rgba(0, 0, 0, 0.230315) 22.87%,
+      rgba(0, 0, 0, 0) 26.64%
+    ),
+    linear-gradient(
+      180deg,
+      #000000 0%,
+      rgba(0, 0, 0, 0.689555) 4.66%,
+      rgba(0, 0, 0, 0.439033) 9.34%,
+      rgba(0, 0, 0, 0.20628) 15.16%,
+      rgba(0, 0, 0, 0) 24.22%
+    ),
+    linear-gradient(
+      189.44deg,
+      rgba(0, 0, 0, 0) 58.48%,
+      rgba(0, 0, 0, 0.106473) 63.17%,
+      rgba(0, 0, 0, 0.235359) 68.85%,
+      rgba(0, 0, 0, 0.492821) 78.08%,
+      rgba(0, 0, 0, 0.740286) 85.86%,
+      #000000 92.87%
+    ),
+    url(${({ url }) => url});
+  background-size: 1920px 770px, 1920px 770px, 1920px 770px, 1920px 770px, 1368px 769px;
+  background-repeat: no-repeat;
+  background-position: center;
+
 `;
 
 export const TitleAndRating = styled.div`
    width: 1368px;
-   height: 770px;
+   height: 710px;
    display: flex;
    flex-direction: column;
    justify-content: flex-end;
    margin-right: auto;
    margin-left: auto;
+   margin: 0 auto;
+   padding-bottom: 56px;
+`;
+
+export const IconBcg = styled.div`
+
+`;
+
+export const AverageBcg = styled.div`
+   color: white;
+   font-weight: 500;
+   font-size: 16px;
+   line-height: 19.2px;
+
+   span {
+   font-weight: 600;
+   font-size: 30px;
+   line-height: 39px;
+   }
+
+`;
+
+export const VotesBcg = styled.div`
+   color: white;
+   font-weight: 500;
+   font-size: 16px;
+   line-height: 19.2px;
 `;
 
 export const MovieTitle = styled.h1`
@@ -39,9 +99,7 @@ export const MovieTitle = styled.h1`
    font-weight: 600;
    font-size: 64px;
    line-height: 76.8px;
-   position: absolute;
-   bottom: 200px;
-   left: 250px;
+
    z-index: 1;
 `;
 
@@ -59,7 +117,7 @@ export const InfoBar = styled.div`
 
 export const Details = styled.div`
    background: white;
-   height: 544px;
+   height: auto;
    width: 100%;
    box-shadow: rgba(186, 199, 213, 0.5) 0px 4px 12px;
    display: flex;
@@ -85,6 +143,7 @@ export const Informations = styled.div`
    height: 464px;
    margin-top: 40px;
    margin-right: 40px;
+   margin-bottom: 40px;
    display: flex;
    flex-direction: column;
    gap: 20px;
@@ -102,7 +161,7 @@ export const Year = styled.div`
    line-height: 26.4px;
 `;
 
-export const Con1 = styled.div`
+export const ProductionAndDate = styled.div`
    display: flex;
    flex-direction: column;
    gap: 12px;
@@ -134,70 +193,57 @@ export const Genre = styled.div`
 `;
 
 export const Rating = styled.div`
-   font-weight: 400;
-   font-size: 14px;
-   line-height: 16.8px;
+   display: flex;
+   flex-direction: row;
+   gap: 12px;
 
-span {
-    font-weight: 500;
-   font-size: 22px;
-   line-height: 28.6px;
-   color: rgba(0, 0, 0, 1);
-}
-
-img {
-    width: 24px;
-}
-
-${({background}) => background && css`
-    color: white;
-    position: absolute;
-    bottom: 170px;
-    left: 250px;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-
-    span {
-        color: white;
-    }
-
-    img {
-        width: 24px;
-    }
-    `}
+   ${({background}) => background && css`
+     display: flex;
+     flex-direction: column;
+     gap: 12px;
    
+   `}
 `;
 
 export const IconAndAverage = styled.div`
    display: flex;
    flex-direction: row;
    gap: 10px;
-   margin-bottom: 10px;
+   align-items: center;
+
+  
 `;
 
 export const Icon = styled.div`
-
+   height: 100%;
+   display: flex;
+   align-items: center;
 `;
 
 export const Average = styled.div`
-   font-weight: 400;
-   font-size: 16px;
-   line-height: 19.2px;
-   color: rgba(255, 255, 255, 1);
+   font-weight: 500;
+   font-size: 14px;
+   line-height: 16.8px;
+   color: rgba(0, 0, 0, 1);
+    height: 100%;
+    display: flex;
+    align-items: center;
 
    span {
-      font-weight: 500;
-      font-size: 30px;
-      line-height: 39px;
+      font-weight: 600;
+      font-size: 22px;
+      line-height: 28.6px;
    }
 `;
 
 export const Votes = styled.div`
-   font-weight: 400;
-   font-size: 16px;
-   line-height: 19.2px;
-   color: rgba(255, 255, 255, 1);
+   font-weight: 500;
+   font-size: 14px;
+   line-height: 16.8px;
+   color: rgba(0, 0, 0, 1);
+   height: 100%;
+   display: flex;
+   align-items: center;
 `;
 
 export const Overview = styled.div`
