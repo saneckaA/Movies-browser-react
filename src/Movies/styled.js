@@ -122,7 +122,7 @@ export const Rating = styled.div`
 `;
 
 export const Icon = styled.div`
-
+   margin-top: -2px;
    `;
 
 export const Value = styled.div`
