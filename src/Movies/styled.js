@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import { Link } from "react-router-dom";
 
 export const Container = styled.div`
    width: 1368px;
@@ -27,7 +27,7 @@ export const MediaContainer = styled.div`
 
 `;
 
-export const Movie = styled.div`
+export const Movie = styled(Link)`
    width: 324px;
    height: 700px;
    border-radius: 5px;
