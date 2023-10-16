@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     Container,
     BcgContainer,
@@ -32,10 +32,32 @@ import {
     MovieName,
     Job
 } from './styled';
+import { useLocation, useParams } from 'react-router-dom';
+import axios from 'axios';
 
 
 const MovieDetail = () => {
 
+    const [movie, setMovie] = useState([]);
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+    const id = searchParams.get('id');
+    console.log('Movie id:', id);
+   
+
+    const fetchMovie = async () => {
+        try {
+            const response = await axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=75950885b0db888f999efec40cdae6e8`);
+            setMovie(response.data);
+            console.log("Response:", response.data);
+        } catch (error) {
+            console.error("Problem with fetching movie data", error)
+        }
+    };
+
+    useEffect(() => {
+        fetchMovie();
+    }, [id])
 
     return (
         <Container >
