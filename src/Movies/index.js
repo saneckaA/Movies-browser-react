@@ -65,6 +65,7 @@ const Movies = () => {
                     movies.map((movie) => (
                         <Movie key={movie.id} to={{
                             pathname: "/movieDetail",
+                            search: `?id=${movie.id}`,
                         }}>
                             <Poster>
                                 <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} />
