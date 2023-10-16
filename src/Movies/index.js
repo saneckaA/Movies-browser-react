@@ -23,6 +23,7 @@ import axios from 'axios';
 const Movies = () => {
 
     const [movies, setMovies] = useState([]);
+    const [genres, setGenres] = useState([]);
 
     const fetchMovies = async () => {
         try {
@@ -34,8 +35,24 @@ const Movies = () => {
         }
     };
 
+    const fetchGenres = async () => {
+        try {
+            const response = await axios.get("https://api.themoviedb.org/3/genre/movie/list?api_key=75950885b0db888f999efec40cdae6e8");
+            setGenres(response.data.genres);
+            console.log(response.data.genres);
+        } catch (error) {
+            console.error("Problem with fetching genres data", error)
+        }
+    };
+
+    const getMovieGenres = (genreIds) => {
+        return genreIds.map(id => genres.find(genre => genre.id === id)?.name).filter(Boolean);
+    }
+
+
     useEffect(() => {
-        fetchMovies()
+        fetchMovies();
+        fetchGenres();
     }, []);
 
     return (
@@ -55,11 +72,9 @@ const Movies = () => {
                                     <MovieTitle>{movie.title}</MovieTitle>
                                     <MovieYear>{movie.release_date.slice(0, 4)}</MovieYear>
                                     <Types>
-                                        <Type>
-                                            Adventue
-                                        </Type>
-                                        <Type>Fantasy</Type>
-                                        <Type>Action</Type>
+                                        {getMovieGenres(movie.genre_ids).map((genreName, index) =>
+                                        <Type key={index}>{genreName}</Type>
+                                        )}
                                     </Types>
                                     <Rating>
                                         <Icon>
