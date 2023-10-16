@@ -28,7 +28,7 @@ import {
     Votes,
     Overview,
     CastTitle,
-    Peop,
+    People,
     Person,
     Image,
     RealName,
@@ -131,23 +131,33 @@ useEffect(() => {
                 </Details>
                 <Cast>
                     <CastTitle>Cast</CastTitle>
-                    <Peop>
-                        <Person>
-                            <Image><img src="images/poster.png" /></Image>
-                            <RealName>Mulan</RealName>
-                            <MovieName>Mulan</MovieName>
+                    <People>
+                        {credits && credits.cast && credits.cast.map((cast) => (
+                            <>
+                            <Person>
+                            <Image><img src={cast.profile_path ? `https://image.tmdb.org/t/p/original${cast.profile_path}` : 'images/Profile.png'} /></Image>
+                            <RealName>{cast.name}</RealName>
+                            <MovieName>{cast.character}</MovieName>
                         </Person>
-                    </Peop>
+                            </>
+                        ))}
+                        
+                    </People>
                 </Cast>
                 <Crew>
                     <CastTitle>Crew</CastTitle>
-                    <Peop>
-                        <Person >
-                            <Image><img src="images/poster.png" /></Image>
-                            <RealName>Mulan</RealName>
-                            <Job>Actor</Job>
+                    <People>
+                        {credits && credits.cast && credits.crew.map((crew) => (
+                            <>
+                             <Person >
+                            <Image><img src={crew.profile_path ? `https://image.tmdb.org/t/p/original${crew.profile_path}` : 'images/Profile.png'} /></Image>
+                            <RealName>{crew.name}</RealName>
+                            <Job>{crew.job}</Job>
                         </Person>
-                    </Peop>
+                            </>
+                        ))}
+                       
+                    </People>
                 </Crew>
             </InfoBar>
         </Container >

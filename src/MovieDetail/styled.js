@@ -1,4 +1,4 @@
-import styled, {css} from "styled-components";
+import styled, { css } from "styled-components";
 
 export const Container = styled.div`
    min-height: 1800px;
@@ -197,7 +197,7 @@ export const Rating = styled.div`
    flex-direction: row;
    gap: 12px;
 
-   ${({background}) => background && css`
+   ${({ background }) => background && css`
      display: flex;
      flex-direction: column;
      gap: 12px;
@@ -265,7 +265,7 @@ export const CastTitle = styled.div`
    margin-bottom: 20px;
 `;
 
-export const Peop = styled.div`
+export const People = styled.div`
    display: grid;
    grid-template-columns: repeat(auto-fill, minmax(208px, 1fr));
    grid-gap: 24px;
@@ -290,7 +290,7 @@ export const Person = styled.div`
 export const Image = styled.div`
  
     img {
-        width: 177px;
+    width: 177px;
     height: 234px;
     border-radius: 5px;
     background: grey;
