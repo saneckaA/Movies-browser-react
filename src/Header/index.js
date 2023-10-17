@@ -1,4 +1,6 @@
 import React from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
 import { 
     Container, 
@@ -13,8 +15,6 @@ import {
     TitleImg, 
     TitleContainer 
 } from "./styled";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
 const Header = () => {
     return (
@@ -27,10 +27,10 @@ const Header = () => {
                     </Title>
                 </TitleContainer>
                 <NavigationContainer>
-                    <Movies >
+                    <Movies activeClassName="active" to="/movies">
                         Movies
                     </Movies>
-                    <People >
+                    <People activeClassName="active" to="/people">
                         People
                     </People>
                 </NavigationContainer>

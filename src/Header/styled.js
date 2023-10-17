@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { NavLink } from "react-router-dom";
+const activeClassName = "link-active";
 
 export const Container = styled.div`
    min-height: 94px;
@@ -54,15 +56,17 @@ export const SearchBar = styled.div`
 export const NavigationContainer = styled.nav`
    display: flex;
    flex-direction: row;
-   gap: 20px;
    margin-right: 150px;
    font-size: 14px;
    font-weight: 600;
    flex-wrap: wrap;
 `;
 
-export const Movies = styled.div`
+export const NavItem = styled(NavLink)`
    color: white;
+   width: 80px;
+   height: 20px;
+   padding: 15px;
    text-transform: uppercase;
    text-align: center;
    align-self: center;
@@ -70,12 +74,15 @@ export const Movies = styled.div`
    margin-right: 35px;
 
    &.active {
-      border: 1px solid white;
+   border: 1px solid white;
    border-radius: 29px;
-   width: 80px;
-   height: 20px;
-   padding: 15px;
    }
+`;
+
+export const Movies = styled(NavItem).attrs(() => ({
+   activeClassName: 'active',
+}))`
+   
 `;
 
 export const People = styled(Movies)`
