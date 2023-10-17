@@ -38,7 +38,6 @@ import {
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 
-
 const MovieDetail = () => {
 
     const [movie, setMovie] = useState([]);
@@ -48,33 +47,30 @@ const MovieDetail = () => {
     const id = searchParams.get('id');
     console.log('Movie id:', id);
 
-useEffect(() => {
-    const fetchMovie = async () => {
-        try {
-            const response = await axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=75950885b0db888f999efec40cdae6e8`);
-            setMovie(response.data);
-            console.log("Response:", response.data);
-        } catch (error) {
-            console.error("Problem with fetching movie data", error)
-        }
-    };
+    useEffect(() => {
+        const fetchMovie = async () => {
+            try {
+                const response = await axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=75950885b0db888f999efec40cdae6e8`);
+                setMovie(response.data);
+                console.log("Response:", response.data);
+            } catch (error) {
+                console.error("Problem with fetching movie data", error)
+            }
+        };
+        const fetchCredits = async () => {
+            try {
+                const response = await axios.get(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=75950885b0db888f999efec40cdae6e8`);
+                setCredits(response.data);
+                console.log(response.data);
+            } catch (error) {
+                console.error("Problem with fetching credits data", error)
+            }
+        };
 
-    const fetchCredits = async () => {
-        try {
-            const response = await axios.get(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=75950885b0db888f999efec40cdae6e8`);
-            setCredits(response.data);
-            console.log(response.data);
-        } catch (error) {
-            console.error("Problem with fetching credits data", error)
-        }
-    };
+        fetchMovie();
+        fetchCredits();
 
-    fetchMovie();
-    fetchCredits();
-
-}, [id]);
-  
-  
+    }, [id]);
 
     return (
         <Container >
@@ -134,14 +130,16 @@ useEffect(() => {
                     <People>
                         {credits && credits.cast && credits.cast.map((cast) => (
                             <>
-                            <Person>
-                            <Image><img src={cast.profile_path ? `https://image.tmdb.org/t/p/original${cast.profile_path}` : 'images/Profile.png'} /></Image>
-                            <RealName>{cast.name}</RealName>
-                            <MovieName>{cast.character}</MovieName>
-                        </Person>
+                                <Person key={cast.id} to={{
+                                    pathname: "/personDetail",
+                                    search: `?id=${cast.id}`,
+                                }}>
+                                    <Image><img src={cast.profile_path ? `https://image.tmdb.org/t/p/original${cast.profile_path}` : 'images/Profile.png'} /></Image>
+                                    <RealName>{cast.name}</RealName>
+                                    <MovieName>{cast.character}</MovieName>
+                                </Person>
                             </>
                         ))}
-                        
                     </People>
                 </Cast>
                 <Crew>
@@ -149,14 +147,17 @@ useEffect(() => {
                     <People>
                         {credits && credits.cast && credits.crew.map((crew) => (
                             <>
-                             <Person >
-                            <Image><img src={crew.profile_path ? `https://image.tmdb.org/t/p/original${crew.profile_path}` : 'images/Profile.png'} /></Image>
-                            <RealName>{crew.name}</RealName>
-                            <Job>{crew.job}</Job>
-                        </Person>
+                                <Person key={crew.id} to={{
+                                    pathname: "/personDetail",
+                                    search: `?id=${crew.id}`,
+                                }} >
+                                    <Image><img src={crew.profile_path ? `https://image.tmdb.org/t/p/original${crew.profile_path}` : 'images/Profile.png'} /></Image>
+                                    <RealName>{crew.name}</RealName>
+                                    <Job>{crew.job}</Job>
+                                </Person>
                             </>
                         ))}
-                       
+
                     </People>
                 </Crew>
             </InfoBar>

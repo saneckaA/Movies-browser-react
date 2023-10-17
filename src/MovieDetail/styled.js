@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import { Link } from "react-router-dom";
 
 export const Container = styled.div`
    min-height: 1800px;
@@ -129,8 +130,9 @@ export const Poster = styled.div`
    margin-top: 40px;
    margin-left: 40px;
    margin-bottom: 40px;
+   background: grey;
   img {
-    height: 464px;
+   height: 464px;
    width: 312px;
    background: grey;
    border-radius: 5px;
@@ -271,7 +273,7 @@ export const People = styled.div`
    grid-gap: 24px;
 `;
 
-export const Person = styled.div`
+export const Person = styled(Link)`
    width: 208px;
    height: 359px;
    background: white;
