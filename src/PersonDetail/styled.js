@@ -77,7 +77,7 @@ export const Overview = styled.div`
    color: rgba(0, 0, 0, 1);
 `;
 
-export const MoviesActor = styled.div`
+export const MoviesCast = styled.div`
    width: 100%;
    height: auto;
    display: flex;
@@ -85,7 +85,7 @@ export const MoviesActor = styled.div`
    gap: 24px;
 `;
 
-export const Title = styled.div`
+export const HeaderName = styled.div`
    font-weight: 600;
    font-size: 36px;
    line-height: 43.2px;
@@ -116,19 +116,18 @@ export const Movie = styled(Link)`
 `;
 
 export const Poster = styled.div`
-
-img {
    width: 292px;
    height: 434px;
-}
+   margin-top: 16px;
+   margin-left: 16px;
+   margin-bottom: 16px;
+   border-radius: 5px;
+   background: grey;
 
+  img {
     width: 292px;
     height: 434px;
-    margin-top: 16px;
-    margin-left: 16px;
-    margin-bottom: 16px;
-    border-radius: 5px;
-    background: grey;
+}
 `;
 
 export const Description = styled.div`
@@ -140,8 +139,8 @@ export const Description = styled.div`
    flex-direction: column;
 `;
 
-export const Text = styled.div`
-font-size: 22px;
+export const MovieTitle = styled.div`
+   font-size: 22px;
    font-weight: 500;
    line-height: 29px;
    margin-top: -5px;
@@ -156,7 +155,7 @@ export const CharacterAndYear = styled.div`
 `;
 
 export const Types = styled.div`
-display: flex;
+   display: flex;
    flex-direction: row;
    gap: 10px;
    padding-top: 10px;
@@ -189,6 +188,23 @@ export const Rating = styled.div`
       width: 16px;
       height: 16px;
    }
+`;
+
+export const Icon = styled.div`
+   margin-top: -2px;
+`;
+
+export const Average = styled.div`
+   font-weight: 600;
+   font-size: 16px;
+   line-height: 24px;
+`;
+
+export const Votes = styled.div`
+   font-weight: 400;
+   font-size: 16px;
+   line-height: 24px;
+   color: rgba(126, 131, 154, 1);
 `;
 
 export const MoviesCrew = styled(MoviesActor)`
