@@ -27,6 +27,7 @@ export const Image = styled.div`
    margin-top: 40px;
    margin-left: 40px;
    margin-bottom: 40px;
+   background: grey;
 
    img {
     width: 399px;

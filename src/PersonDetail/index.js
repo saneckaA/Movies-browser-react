@@ -101,8 +101,8 @@ const PersonDetail = () => {
                 <Information>
                     <Name>{person.name}</Name>
                     <Birth>
-                        <Date><span>Date of birth:</span> {person.birthday} </Date>
-                        <Place><span>Place of birth:</span> {person.place_of_birth} </Place>
+                        <Date><span>Date of birth:</span> {person.birthday ? person.birthday : "No information"} </Date>
+                        <Place><span>Place of birth:</span> {person.place_of_birth ? person.place_of_birth : "No information"} </Place>
                     </Birth>
                     <Overview>
                         {person.biography}
@@ -114,8 +114,11 @@ const PersonDetail = () => {
                 <Movies>
                     {cast.map((cast) => (
                         <>
-                            <Movie key={cast.id}  >
-                                <Poster><img src={`https://image.tmdb.org/t/p/original${cast.poster_path}`} /></Poster>
+                            <Movie key={cast.id} to={{
+                                pathname: "/movieDetail",
+                                search: `?id=${cast.id}`,
+                            }} >
+                                <Poster><img src={cast.poster_path ? `https://image.tmdb.org/t/p/original${cast.poster_path}` : 'images/Video.png'} /></Poster>
                                 <Description>
                                     <MovieTitle>{cast.title}</MovieTitle>
                                     <CharacterAndYear>{cast.character} ({cast.release_date.slice(0, 4)})</CharacterAndYear>
@@ -148,8 +151,11 @@ const PersonDetail = () => {
                 <Movies>
                     {crew.map((crew) => (
                         <>
-                            <Movie key={crew.id}>
-                                <Poster><img src={`https://image.tmdb.org/t/p/original${crew.poster_path}`} /></Poster>
+                            <Movie key={crew.id} to={{
+                                pathname: "/movieDetail",
+                                search: `?id=${crew.id}`,
+                            }}>
+                                <Poster><img src={crew.poster_path ? `https://image.tmdb.org/t/p/original${crew.poster_path}` : 'images/Video.png'} /></Poster>
                                 <Description>
                                     <MovieTitle>{crew.title}</MovieTitle>
                                     <CharacterAndYear>{crew.character} ({crew.release_date.slice(0, 4)})</CharacterAndYear>
