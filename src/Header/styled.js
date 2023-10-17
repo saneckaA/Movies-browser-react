@@ -57,7 +57,7 @@ export const NavigationContainer = styled.nav`
    display: flex;
    flex-direction: row;
    margin-right: 150px;
-   font-size: 14px;
+   font-size: 16px;
    font-weight: 600;
    flex-wrap: wrap;
 `;
