@@ -28,7 +28,6 @@ import {
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 
-
 const PersonDetail = () => {
 
     const [person, setPerson] = useState([]);
@@ -37,6 +36,7 @@ const PersonDetail = () => {
     const [crew, setCrew] = useState([]);
     const [castLength, setCastLength] = useState(0);
     const [crewLength, setCrewLength] = useState(0);
+    const [genres, setGenres] = useState([]);
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     const id = searchParams.get('id');
@@ -72,9 +72,25 @@ const PersonDetail = () => {
                 console.error("Problem with fetching person credits data", error)
             }
         };
+
+        const fetchGenres = async () => {
+            try {
+                const response = await axios.get("https://api.themoviedb.org/3/genre/movie/list?api_key=75950885b0db888f999efec40cdae6e8");
+                setGenres(response.data.genres);
+                console.log(response.data.genres);
+            } catch (error) {
+                console.error("Problem with fetching genres data", error)
+            }
+        };
+
         fetchPerson();
         fetchPersonCredits();
-    }, []);
+        fetchGenres();
+    }, [id]);
+
+    const getMovieGenres = (genreIds) => {
+        return genreIds.map(id => genres.find(genre => genre.id === id)?.name).filter(Boolean);
+    };
 
     return (
         <Container>
@@ -103,6 +119,11 @@ const PersonDetail = () => {
                                 <Description>
                                     <MovieTitle>{cast.title}</MovieTitle>
                                     <CharacterAndYear>{cast.character} ({cast.release_date.slice(0, 4)})</CharacterAndYear>
+                                    <Types>
+                                        {getMovieGenres(cast.genre_ids).map((genreName, index) =>
+                                            <Type key={index}>{genreName}</Type>
+                                        )}
+                                    </Types>
                                 </Description>
                                 <Rating>
                                     <Icon>
@@ -132,6 +153,11 @@ const PersonDetail = () => {
                                 <Description>
                                     <MovieTitle>{crew.title}</MovieTitle>
                                     <CharacterAndYear>{crew.character} ({crew.release_date.slice(0, 4)})</CharacterAndYear>
+                                    <Types>
+                                        {getMovieGenres(crew.genre_ids).map((genreName, index) =>
+                                            <Type key={index}>{genreName}</Type>
+                                        )}
+                                    </Types>
                                 </Description>
                                 <Rating>
                                     <Icon>

@@ -207,7 +207,7 @@ export const Votes = styled.div`
    color: rgba(126, 131, 154, 1);
 `;
 
-export const MoviesCrew = styled(MoviesActor)`
+export const MoviesCrew = styled(MoviesCast)`
 
 `;
 
