@@ -27,6 +27,7 @@ import {
 } from './styled';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
+import ReadMoreButton from '../ReadMoreButton';
 
 const PersonDetail = () => {
 
@@ -105,7 +106,9 @@ const PersonDetail = () => {
                         <Place><span>Place of birth:</span> {person.place_of_birth ? person.place_of_birth : "No information"} </Place>
                     </Birth>
                     <Overview>
-                        {person.biography}
+                        {person.biography ? (
+                            <ReadMoreButton content={person.biography} />
+                        ) : (<p>Biography not available</p>)}
                     </Overview>
                 </Information>
             </Details>
