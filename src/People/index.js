@@ -28,7 +28,10 @@ const People = () => {
             <FamousPeople>
                 {people.map((person) => (
                     <>
-                        <Person key={person.id}>
+                        <Person key={person.id} to={{
+                            pathname: "/personDetail",
+                            search: `?id=${person.id}`
+                        }}>
                             <Image> <img src={person.profile_path ? `https://image.tmdb.org/t/p/original${person.profile_path}` : "images/Profile.png"} /></Image>
                             <Name>{person.name}</Name>
                         </Person>
