@@ -47,8 +47,7 @@ const Movies = () => {
 
     const getMovieGenres = (genreIds) => {
         return genreIds.map(id => genres.find(genre => genre.id === id)?.name).filter(Boolean);
-    }
-
+    };
 
     useEffect(() => {
         fetchMovies();
@@ -68,7 +67,7 @@ const Movies = () => {
                             search: `?id=${movie.id}`,
                         }}>
                             <Poster>
-                                <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} />
+                                <img src={movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : 'images/Video/png'} />
                             </Poster>
                             <MediaContainer>
                                 <Descirption>
