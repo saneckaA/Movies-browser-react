@@ -8,8 +8,6 @@ import {
     Descirption,
     MovieTitle,
     MovieYear,
-    Types,
-    Type,
     Rating,
     Icon,
     Value,
@@ -21,6 +19,7 @@ import Pagination from '../../Pagination';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectMovies, selectMoviesError, selectMoviesLoading, setError, setLoading, setMovies } from '../moviesSlice';
 import axios from 'axios';
+import Genres from '../Genres';
 
 const apiUrl = "https://api.themoviedb.org/3/";
 const apiKey = "75950885b0db888f999efec40cdae6e8";
@@ -74,9 +73,7 @@ const MoviesList = () => {
                             <Descirption>
                                 <MovieTitle>{movie.title}</MovieTitle>
                                 <MovieYear>{movie.release_date.slice(0, 4)}</MovieYear>
-                                <Types>
-                           
-                                </Types>
+                                <Genres movie={movie} />
                                 <Rating>
                                     <Icon>
                                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

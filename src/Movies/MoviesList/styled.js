@@ -81,34 +81,6 @@ export const MovieYear = styled.div`
    color: rgba(126, 131, 154, 1);
 `;
 
-export const Types = styled.div`
-   display: flex;
-   flex-direction: row;
-   gap: 10px;
-   padding-top: 10px;
-   flex-wrap: wrap;
-
-   @media (max-width: 767px) {
-    gap: 8px;
-    padding-top: 6px;
-   }
-`;
-
-export const Type = styled.div`
-   background: rgba(228, 230, 240, 1);
-   border-radius: 5px;
-   font-size: 14px;
-   font-weight: 400;
-   line-height: 19.6px;
-   padding: 8px 16px 8px 16px;
-
-   @media (max-width: 767px) {
-    font-size: 10px;
-    line-height: 11px;
-    padding: 4px 8px 4px 8px;
-   }
-`;
-
 export const Rating = styled.div`
    min-width: 140px;
    height: 24px;
