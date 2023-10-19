@@ -28,71 +28,44 @@ import {
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 import ReadMoreButton from '../ReadMoreButton';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchCredits, fetchPerson } from './apiPerson';
+import { selectCast, selectCastLength, selectCrew, selectCrewLength, selectPersonDetails, selectPersonStatus } from './personSlice';
+import store from './store';
+import NoResults from '../NoResults';
+import Error from '../Error';
+import Genres from '../Genres';
 
 const PersonDetail = () => {
 
-    const [person, setPerson] = useState([]);
-    const [credits, setCredits] = useState([]);
-    const [cast, setCast] = useState([]);
-    const [crew, setCrew] = useState([]);
-    const [castLength, setCastLength] = useState(0);
-    const [crewLength, setCrewLength] = useState(0);
-    const [genres, setGenres] = useState([]);
+    const dispatch = useDispatch();
     const location = useLocation();
-    const searchParams = new URLSearchParams(location.search);
-    const id = searchParams.get('id');
-    console.log('ID person:', id);
+    const searchParams = new URLSearchParams(location.search)
+    const personId = searchParams.get('id');
+    console.log('Person id:', personId);
+
+    const person = useSelector((state) => selectPersonDetails(state));
+    console.log("Wynik person:", selectPersonDetails(store.getState()))
+    const cast = useSelector((state) => selectCast(state));
+    console.log("Wynik cast person:", selectCast(store.getState()))
+    const crew = useSelector((state) => selectCrew(state));
+    console.log("Wynik crew person:", selectCrew(store.getState()))
+    const status = useSelector((state) => selectPersonStatus(state));
+    const castLength = useSelector(selectCastLength);
+    const crewLength = useSelector(selectCrewLength);
 
     useEffect(() => {
-        const fetchPerson = async () => {
-            try {
-                const response = await axios.get(`https://api.themoviedb.org/3/person/${id}?api_key=75950885b0db888f999efec40cdae6e8`);
-                setPerson(response.data);
-                console.log(response.data);
-            } catch (error) {
-                console.error("Problem with fetching person data", error)
-            }
-        };
+        dispatch(fetchPerson(personId));
+        dispatch(fetchCredits(personId));
+    }, [dispatch, personId]);
 
-        const fetchPersonCredits = async () => {
-            try {
-                const response = await axios.get(`https://api.themoviedb.org/3/person/${id}/movie_credits?api_key=75950885b0db888f999efec40cdae6e8`);
-                setCredits(response.data);
-                console.log(response.data);
-                setCast(response.data.cast);
-                console.log("Cast:", response.data.cast);
-                setCrew(response.data.crew);
-                console.log("Crew:", response.data.crew);
-                const castLength = response.data.cast.length;
-                setCastLength(castLength);
-                console.log(`Cast has ${castLength} elements`);
-                const crewLength = response.data.crew.length;
-                setCrewLength(crewLength);
-                console.log(`Crew has ${crewLength} elements`);
-            } catch (error) {
-                console.error("Problem with fetching person credits data", error)
-            }
-        };
-
-        const fetchGenres = async () => {
-            try {
-                const response = await axios.get("https://api.themoviedb.org/3/genre/movie/list?api_key=75950885b0db888f999efec40cdae6e8");
-                setGenres(response.data.genres);
-                console.log(response.data.genres);
-            } catch (error) {
-                console.error("Problem with fetching genres data", error)
-            }
-        };
-
-        fetchPerson();
-        fetchPersonCredits();
-        fetchGenres();
-    }, [id]);
-
-    const getMovieGenres = (genreIds) => {
-        return genreIds.map(id => genres.find(genre => genre.id === id)?.name).filter(Boolean);
+    if (status === "loading") {
+        return <div>Loading..</div>
+    } else if (status === "fail") {
+        return <Error />
+    } else if (status === "noResult") {
+        return <NoResults />
     };
-
     return (
         <Container>
             <Details>
@@ -125,11 +98,7 @@ const PersonDetail = () => {
                                 <Description>
                                     <MovieTitle>{cast.title}</MovieTitle>
                                     <CharacterAndYear>{cast.character} ({cast.release_date.slice(0, 4)})</CharacterAndYear>
-                                    <Types>
-                                        {getMovieGenres(cast.genre_ids).map((genreName, index) =>
-                                            <Type key={index}>{genreName}</Type>
-                                        )}
-                                    </Types>
+                                    <Genres cast={cast} />
                                 </Description>
                                 <Rating>
                                     <Icon>
@@ -161,11 +130,9 @@ const PersonDetail = () => {
                                 <Poster><img src={crew.poster_path ? `https://image.tmdb.org/t/p/original${crew.poster_path}` : 'images/Video.png'} /></Poster>
                                 <Description>
                                     <MovieTitle>{crew.title}</MovieTitle>
-                                    <CharacterAndYear>{crew.character} ({crew.release_date.slice(0, 4)})</CharacterAndYear>
+                                    <CharacterAndYear>{crew.job} ({crew.release_date.slice(0, 4)})</CharacterAndYear>
                                     <Types>
-                                        {getMovieGenres(crew.genre_ids).map((genreName, index) =>
-                                            <Type key={index}>{genreName}</Type>
-                                        )}
+                                       
                                     </Types>
                                 </Description>
                                 <Rating>
