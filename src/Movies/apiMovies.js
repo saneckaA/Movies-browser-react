@@ -1,20 +1,22 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { setError, setLoading, setMovies } from "./moviesSlice";
 
 const apiUrl = "https://api.themoviedb.org/3/";
 const apiKey = "75950885b0db888f999efec40cdae6e8";
 
 export const imgBaseUrl = "https://image.tmdb.org/t/p/w500";
 
-export const fetchMovies = async () => {
-
+export const fetchMovies = async (dispatch) => {
     const url = `${apiUrl}movie/popular?api_key=${apiKey}`;
     try {
         const response = await axios.get(url);
         console.log(response.data.results);
-        return response.data.results;
+        dispatch(setMovies(response.data.results));
+        dispatch(setLoading(false));
     } catch (error) {
-        console.error("Problem with fetching movies data", error)
+        dispatch(setError(error));
+        dispatch(setLoading(false))
     }
 };
 

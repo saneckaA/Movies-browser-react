@@ -12,6 +12,7 @@ const moviesSlice = createSlice({
     reducers: {
       setMovies: (state, action) => {
         state.movies = action.payload;
+        console.log('Fetching movies  started:', JSON.stringify(state, null, 2));
       },
       setLoading: (state, action) => {
         state.loading = action.payload;
