@@ -131,6 +131,8 @@ export const Poster = styled.div`
    margin-left: 40px;
    margin-bottom: 40px;
    background: grey;
+   height: 464px;
+   
   img {
    height: 464px;
    width: 312px;
