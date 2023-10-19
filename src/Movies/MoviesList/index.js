@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import {
     Container,
     ContainerTitle,
@@ -17,34 +17,21 @@ import {
 
 import Pagination from '../../Pagination';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectMovies, selectMoviesError, selectMoviesLoading, setError, setLoading, setMovies } from '../moviesSlice';
-import axios from 'axios';
+import { selectMovies, selectMoviesError, selectMoviesLoading } from '../moviesSlice';
+import { fetchMovies } from '../apiMovies';
 import Genres from '../Genres';
-
-const apiUrl = "https://api.themoviedb.org/3/";
-const apiKey = "75950885b0db888f999efec40cdae6e8";
+import store from '../../MovieDetail/store';
 
 const MoviesList = () => {
 
     const dispatch = useDispatch();
     const movies = useSelector(selectMovies);
+    console.log("Wynik movies:", selectMovies(store.getState()))
     const isLoading = useSelector(selectMoviesLoading);
     const isError = useSelector(selectMoviesError);
 
     useEffect(() => {
-        dispatch(setLoading(true));
-        const url = `${apiUrl}movie/popular?api_key=${apiKey}`;
-
-        axios
-            .get(url)
-            .then((response) => {
-                dispatch(setMovies(response.data.results));
-                dispatch(setLoading(false));
-            })
-            .catch((error) => {
-                dispatch(setError(error));
-                dispatch(setLoading(false));
-            });
+       fetchMovies(dispatch)
     }, [dispatch])
 
     if (isLoading) {
