@@ -165,7 +165,7 @@ export const Year = styled.div`
    line-height: 26.4px;
 `;
 
-export const ProductionAndDate = styled.div`
+export const ProductionDateAndCompanies = styled.div`
    display: flex;
    flex-direction: column;
    gap: 12px;
@@ -177,6 +177,10 @@ export const Production = styled.div`
    span {
     color: rgba(116, 120, 139, 1);
    }
+`;
+
+export const Companies = styled(Production)`
+
 `;
 
 export const ReleaseDate = styled(Production)`

@@ -18,8 +18,9 @@ import {
     Informations,
     Title,
     Year,
-    ProductionAndDate,
+    ProductionDateAndCompanies,
     Production,
+    Companies,
     ReleaseDate,
     Rating,
     Icon,
@@ -41,7 +42,7 @@ import { selectCast, selectCrew, selectMovieDetails, selectMovieStatus } from '.
 import { fetchCredits, fetchMovie } from './apiMovie';
 import Error from '../Error';
 import NoResults from '../NoResults';
-import store from './store';
+import store from '../store';
 
 
 const MovieDetail = () => {
@@ -56,7 +57,7 @@ const MovieDetail = () => {
     console.log("Wynik movie:", selectMovieDetails(store.getState()))
     const cast = useSelector((state) => selectCast(state));
     console.log("Wynik cast:", selectCast(store.getState()))
-    const crew = useSelector((state) => selectCast(state));
+    const crew = useSelector((state) => selectCrew(state));
     console.log("Wynik crew:", selectCrew(store.getState()))
     const status = useSelector((state) => selectMovieStatus(state));
 
@@ -106,10 +107,16 @@ const MovieDetail = () => {
                     <Informations>
                         <Title>{movie.title}</Title>
                         <Year>{movie.release_date ? movie.release_date.slice(0, 4) : "No information"}</Year>
-                        <ProductionAndDate>
+                        <ProductionDateAndCompanies>
                             <Production><span>Production:</span> {movie.production_countries ? movie.production_countries.map(country => country.name).join(', ') : "No information"}  </Production>
+                            <Companies><span>Companies:</span> {movie.production_companies ? movie.production_companies.map(company => company.name).join(', ') : "No information"}</Companies>
                             <ReleaseDate><span>Release date:</span> {movie.release_date} </ReleaseDate>
-                        </ProductionAndDate>
+                        </ProductionDateAndCompanies>
+                        <Genres>
+                        {movie.genres ? movie.genres.map((genre) => (
+                            <Genre key={genre.id}>{genre.name}</Genre>
+                        )) : undefined}
+                       </Genres>
                         <Rating>
                             <Icon>
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
