@@ -4,6 +4,7 @@ const initialState = {
     people: [],
     loading: false,
     error: null,
+    totalPages: 1,
 };
 
 const peopleSlice = createSlice({
@@ -20,6 +21,9 @@ const peopleSlice = createSlice({
       setError: (state, action) => {
         state.error = action.payload;
       },
+      setTotalPages: (state, action) => {
+        state.totalPages = action.payload;
+      }
     },
 });
 
@@ -27,6 +31,7 @@ export const {
     setPeople,
     setLoading, 
     setError,
+    setTotalPages,
 } = peopleSlice.actions;
 
 const selectPeopleState = state => state.people;
@@ -34,6 +39,7 @@ const selectPeopleState = state => state.people;
 export const selectPeople = state => selectPeopleState(state).people;
 export const selectPeopleLoading = state => selectPeopleState(state).loading;
 export const selectPeopleError = state => selectPeopleState(state).error;
+export const selectPeopleTotalPages = state => selectPeopleState(state).totalPages;
 
 export default peopleSlice.reducer;
 
