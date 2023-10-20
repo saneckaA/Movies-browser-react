@@ -14,33 +14,37 @@ import {
     Votes,
     MediaContainer
 } from './styled';
-
 import Pagination from '../../Pagination';
+import Genres from '../../Genres';
+import pageQueryParamName from '../../pageQueryParamName';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectMovies, selectMoviesError, selectMoviesLoading } from '../moviesSlice';
+import { selectMoviesTotalPages, selectMovies, selectMoviesError, selectMoviesLoading } from '../moviesSlice';
 import { fetchMovies } from '../apiMovies';
-import Genres from '../Genres';
-import store from '../../MovieDetail/store';
+import { useQueryParamater } from '../../queryParameters';
 
 const MoviesList = () => {
 
     const dispatch = useDispatch();
     const movies = useSelector(selectMovies);
-    console.log("Wynik movies:", selectMovies(store.getState()))
     const isLoading = useSelector(selectMoviesLoading);
     const isError = useSelector(selectMoviesError);
 
+    const currentPage = +useQueryParamater(pageQueryParamName) || 1;
+    const totalPages = useSelector(selectMoviesTotalPages);
+
+    const pageQuery = +useQueryParamater(pageQueryParamName) || 1;
+
     useEffect(() => {
-       fetchMovies(dispatch)
-    }, [dispatch])
+        fetchMovies(dispatch, pageQuery)
+    }, [dispatch, pageQuery,]);
 
     if (isLoading) {
         return <div>Loading..</div>
-    }
+    };
 
     if (isError) {
         return <div>Error</div>
-    }
+    };
 
     return (
         <Container>
@@ -80,7 +84,11 @@ const MoviesList = () => {
                 ))
                 }
             </MoviesBar>
-            <Pagination />
+            <Pagination
+                currentPage={currentPage}
+                pageQueryParamName={pageQueryParamName}
+                totalPages={totalPages}
+            />
         </Container>
     )
 }

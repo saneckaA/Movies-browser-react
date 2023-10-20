@@ -1,23 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Title, FamousPeople, Person, Image, Name } from './styled';
-import axios from 'axios';
+
 import Pagination from '../Pagination';
+import pageQueryParamName from '../pageQueryParamName';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectPeople, selectPeopleLoading } from './peopleSlice';
+import { useQueryParamater } from '../queryParameters';
+import { selectPeople, selectPeopleLoading, selectPeopleTotalPages } from './peopleSlice';
 import { fetchPeople } from './apiPeople';
-import store from '../PersonDetail/store';
 
 const People = () => {
 
     const dispatch = useDispatch();
     const people = useSelector(selectPeople);
-    console.log("Wynik people:", selectPeople(store.getState()))
     const isLoading = useSelector(selectPeopleLoading);
     const isError = useSelector(selectPeopleLoading);
+    const currentPage = +useQueryParamater(pageQueryParamName) || 1;
+    const pageQuery = +useQueryParamater(pageQueryParamName) || 1;
+    const totalPages = useSelector(selectPeopleTotalPages);
 
     useEffect(() => {
-        fetchPeople(dispatch)
-    }, [dispatch]);
+        fetchPeople(dispatch, pageQuery)
+    }, [dispatch, pageQuery]);
 
     if (isLoading) {
         return <div>Loading..</div>
@@ -33,23 +36,23 @@ const People = () => {
                 Popular people
             </Title>
             <FamousPeople>
-               {people? people.map((person) => (
-                <>
+                {people ? people.map((person) => (
+                    <>
                         <Person key={person.id} to={{
                             pathname: "/personDetail",
                             search: `?id=${person.id}`
                         }}>
                             <Image> <img src={person.profile_path ? `https://image.tmdb.org/t/p/original${person.profile_path}` : "images/Profile.png"} /></Image>
                             <Name>{person.name}</Name>
-                            
                         </Person>
                     </>
-
-               )) : undefined}
-                    
-                
+                )) : undefined}
             </FamousPeople>
-            <Pagination />
+            <Pagination
+                currentPage={currentPage}
+                pageQueryParamName={pageQueryParamName}
+                totalPages={totalPages}
+            />
         </Container>
     )
 }
