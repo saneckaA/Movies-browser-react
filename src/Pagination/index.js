@@ -1,26 +1,47 @@
 import React from 'react';
 import { Container, First, Previous, Pages, Next, Last, Prev, Nex } from './styled';
+import { useNavigate } from 'react-router-dom';
 
-const Pagination = () => {
+const Pagination = ({ currentPage, pageQueryParamName, totalPages }) => {
+
+    const navigate = useNavigate();
+    const disableNext = currentPage === totalPages;
+    const disablePrev = currentPage === 1;
+
+    const onFirstButtonClick = () => {
+        navigate(`?${pageQueryParamName}=1 `)
+    };
+
+    const onPrevButtonClick = () => {
+        navigate(`?${pageQueryParamName}=${currentPage - 1}`)
+    };
+
+    const onNextButtonClick = () => {
+        navigate(`?${pageQueryParamName}=${currentPage + 1}`)
+    };
+
+    const onLastButtonClick = () => {
+        navigate(`?${pageQueryParamName}=${currentPage}=${totalPages}`)
+    };
 
     return (
         <Container >
             <Prev>
-                <First>
+                <First onClick={onFirstButtonClick} disabled={disablePrev}>
                     <img src="images/prev.svg" /> First
                 </First>
-                <Previous>
+                <Previous onClick={onPrevButtonClick} disabled={disablePrev}>
                     <img src="images/prev.svg" /> Previous
                 </Previous>
             </Prev>
             <Pages>
-                Page <span></span> of <span></span>
+                Page <span>{currentPage}</span> of <span>{totalPages}</span>
             </Pages>
             <Nex>
-                <Next >
+                <Next onClick={onNextButtonClick} disabled={disableNext}>
                     Next <img src="images/next.svg" />
                 </Next>
-                <Last >
+                <Last onClick={onLastButtonClick} disabled={disableNext}>
                     Last <img src="images/next.svg" />
                 </Last>
             </Nex>
