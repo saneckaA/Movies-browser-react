@@ -1,22 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
-import { 
-    Container, 
-    Title, 
-    Movies, 
-    People, 
-    SearchBar, 
-    ThemeButton, 
-    Language, 
-    HeaderContainer, 
-    NavigationContainer, 
-    TitleImg, 
-    TitleContainer 
+import {
+    Container,
+    Title,
+    Movies,
+    People,
+    ThemeButton,
+    Language,
+    HeaderContainer,
+    NavigationContainer,
+    TitleImg,
+    TitleContainer
 } from "./styled";
 
+import { useLocation } from "react-router-dom";
+import SearchResults from "../SearchResults";
+
 const Header = () => {
+
     return (
         <Container>
             <HeaderContainer>
@@ -34,9 +37,7 @@ const Header = () => {
                         People
                     </People>
                 </NavigationContainer>
-                <SearchBar>
-                    <FontAwesomeIcon icon={faMagnifyingGlass} />  Search for movies...
-                </SearchBar>
+                <SearchResults />
             </HeaderContainer>
             <ThemeButton>
                 Button
