@@ -18,7 +18,7 @@ import Pagination from '../../Pagination';
 import Genres from '../../Genres';
 import pageQueryParamName from '../../pageQueryParamName';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectMoviesTotalPages, selectMovies, selectMoviesError, selectMoviesLoading, selectMoviesByQuery, setMovies, setTotalPages, selectMoviesLength, } from '../moviesSlice';
+import { selectMoviesTotalPages, selectMoviesError, selectMoviesLoading, selectMoviesByQuery, selectMoviesTotalResults, } from '../moviesSlice';
 import { fetchMovies } from '../apiMovies';
 import { useQueryParamater } from '../../queryParameters';
 import searchQueryParamName from '../../searchQueryParamName';
@@ -26,16 +26,15 @@ import searchQueryParamName from '../../searchQueryParamName';
 const MoviesList = () => {
 
     const dispatch = useDispatch();
+    const movies = useSelector(state => selectMoviesByQuery(state, searchQuery));
+    const totalPages = useSelector(selectMoviesTotalPages);
+    const totalResults = useSelector(selectMoviesTotalResults);
     const isLoading = useSelector(selectMoviesLoading);
     const isError = useSelector(selectMoviesError);
     const currentPage = +useQueryParamater(pageQueryParamName) || 1;
-    const totalPages = useSelector(selectMoviesTotalPages);
     const pageQuery = currentPage;
     const searchQuery = useQueryParamater(searchQueryParamName) || "";
-    const movies = useSelector(state => selectMoviesByQuery(state, searchQuery));
-    console.log("Movies:", movies);
-    const results = useSelector(selectMoviesTotalPages);
-
+ 
     useEffect(() => {
         fetchMovies(dispatch, pageQuery, searchQuery)
     }, [dispatch, pageQuery, searchQuery]);
@@ -51,7 +50,7 @@ const MoviesList = () => {
     return (
         <Container>
             <ContainerTitle>
-                {searchQuery ? `Search results for "${searchQuery}" ()` : "Popular movies"}
+                {searchQuery ? `Search results for "${searchQuery}" (${totalResults})` : "Popular movies"}
             </ContainerTitle>
             <MoviesBar>
                 {movies.map((movie) => (
