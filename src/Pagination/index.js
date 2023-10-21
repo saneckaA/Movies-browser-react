@@ -2,26 +2,26 @@ import React from 'react';
 import { Container, First, Previous, Pages, Next, Last, Prev, Nex } from './styled';
 import { useNavigate } from 'react-router-dom';
 
-const Pagination = ({ currentPage, pageQueryParamName, totalPages }) => {
+const Pagination = ({ currentPage, pageQueryParamName, totalPages, searchQueryParamName, searchQuery }) => {
 
     const navigate = useNavigate();
     const disableNext = currentPage === totalPages;
     const disablePrev = currentPage === 1;
 
     const onFirstButtonClick = () => {
-        navigate(`?${pageQueryParamName}=1 `)
+        navigate(`?${pageQueryParamName}=1&${searchQueryParamName}=${searchQuery}`)
     };
 
     const onPrevButtonClick = () => {
-        navigate(`?${pageQueryParamName}=${currentPage - 1}`)
+        navigate(`?${pageQueryParamName}=${currentPage - 1}&${searchQueryParamName}=${searchQuery}`)
     };
 
     const onNextButtonClick = () => {
-        navigate(`?${pageQueryParamName}=${currentPage + 1}`)
+        navigate(`?${pageQueryParamName}=${currentPage + 1}&${searchQueryParamName}=${searchQuery}`)
     };
 
     const onLastButtonClick = () => {
-        navigate(`?${pageQueryParamName}=${currentPage}=${totalPages}`)
+        navigate(`?${pageQueryParamName}=${totalPages}&${searchQueryParamName}=${searchQuery}`)
     };
 
     return (
