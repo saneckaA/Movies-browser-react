@@ -26,14 +26,16 @@ import searchQueryParamName from '../../searchQueryParamName';
 const MoviesList = () => {
 
     const dispatch = useDispatch();
+    const currentPage = +useQueryParamater(pageQueryParamName) || 1;
+    const pageQuery = currentPage;
+    const searchQuery = useQueryParamater(searchQueryParamName) || "";
     const movies = useSelector(state => selectMoviesByQuery(state, searchQuery));
     const totalPages = useSelector(selectMoviesTotalPages);
     const totalResults = useSelector(selectMoviesTotalResults);
     const isLoading = useSelector(selectMoviesLoading);
     const isError = useSelector(selectMoviesError);
-    const currentPage = +useQueryParamater(pageQueryParamName) || 1;
-    const pageQuery = currentPage;
-    const searchQuery = useQueryParamater(searchQueryParamName) || "";
+
+
  
     useEffect(() => {
         fetchMovies(dispatch, pageQuery, searchQuery)
