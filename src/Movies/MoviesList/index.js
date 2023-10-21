@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
     Container,
     ContainerTitle,
@@ -18,25 +18,27 @@ import Pagination from '../../Pagination';
 import Genres from '../../Genres';
 import pageQueryParamName from '../../pageQueryParamName';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectMoviesTotalPages, selectMovies, selectMoviesError, selectMoviesLoading } from '../moviesSlice';
+import { selectMoviesTotalPages, selectMovies, selectMoviesError, selectMoviesLoading, selectMoviesByQuery, setMovies, setTotalPages, selectMoviesLength, } from '../moviesSlice';
 import { fetchMovies } from '../apiMovies';
 import { useQueryParamater } from '../../queryParameters';
+import searchQueryParamName from '../../searchQueryParamName';
 
 const MoviesList = () => {
 
     const dispatch = useDispatch();
-    const movies = useSelector(selectMovies);
     const isLoading = useSelector(selectMoviesLoading);
     const isError = useSelector(selectMoviesError);
-
     const currentPage = +useQueryParamater(pageQueryParamName) || 1;
     const totalPages = useSelector(selectMoviesTotalPages);
-
-    const pageQuery = +useQueryParamater(pageQueryParamName) || 1;
+    const pageQuery = currentPage;
+    const searchQuery = useQueryParamater(searchQueryParamName) || "";
+    const movies = useSelector(state => selectMoviesByQuery(state, searchQuery));
+    console.log("Movies:", movies);
+    const results = useSelector(selectMoviesTotalPages);
 
     useEffect(() => {
-        fetchMovies(dispatch, pageQuery)
-    }, [dispatch, pageQuery,]);
+        fetchMovies(dispatch, pageQuery, searchQuery)
+    }, [dispatch, pageQuery, searchQuery]);
 
     if (isLoading) {
         return <div>Loading..</div>
@@ -49,7 +51,7 @@ const MoviesList = () => {
     return (
         <Container>
             <ContainerTitle>
-                Popular movies
+                {searchQuery ? `Search results for "${searchQuery}" ()` : "Popular movies"}
             </ContainerTitle>
             <MoviesBar>
                 {movies.map((movie) => (
@@ -87,6 +89,8 @@ const MoviesList = () => {
             <Pagination
                 currentPage={currentPage}
                 pageQueryParamName={pageQueryParamName}
+                searchQueryParamName={searchQueryParamName}
+                searchQuery={searchQuery}
                 totalPages={totalPages}
             />
         </Container>
