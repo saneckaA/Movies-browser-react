@@ -1,19 +1,21 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { setError, setLoading, setMovies, setTotalPages } from "./moviesSlice";
+import { setError, setLoading, setMovies, setTotalPages, setTotalResults } from "./moviesSlice";
 
 const apiUrl = "https://api.themoviedb.org/3/";
 const apiKey = "75950885b0db888f999efec40cdae6e8";
 
-export const fetchMovies = async (dispatch, pageQuery) => {
+export const fetchMovies = async (dispatch, pageQuery, searchQuery) => {
 
-    const url = `${apiUrl}movie/popular?api_key=${apiKey}&page=${pageQuery}`;
+    let url = `${apiUrl}${searchQuery ? "search/movie" : "movie/popular"}?api_key=${apiKey}&page=${pageQuery}&query=${searchQuery}`;
+
     try {
         const response = await axios.get(url);
         console.log(response.data.results);
         dispatch(setMovies(response.data.results));
         dispatch(setLoading(false));
         dispatch(setTotalPages(response.data.total_pages));
+        dispatch(setTotalResults(response.data.total_results));
     } catch (error) {
         dispatch(setError(error));
         dispatch(setLoading(false))
