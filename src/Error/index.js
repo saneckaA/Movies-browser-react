@@ -1,20 +1,26 @@
 import React from 'react';
 import { Container, Image, Title, SubTitle, Button } from './styled';
+import { useSelector } from 'react-redux';
+import { selectLanguage } from '../LanguageSelect/languageSlice';
+import { errorText, errorTitle, returnButton } from '../language';
 
 const Error = () => {
+
+    const language = useSelector(selectLanguage);
+
     return (
         <Container>
             <Image>
                 <img src="images/error.png" />
             </Image>
             <Title>
-                Ooops! Something went wrong...
+                {errorTitle[language]}
             </Title>
             <SubTitle>
-                Please check your network connection <br /> and try again
+                {errorText[language]}
             </SubTitle>
             <Button to="/movies">
-                <button>Back to home page</button>
+                <button>{returnButton[language]}</button>
             </Button>
         </Container>
     )

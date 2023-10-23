@@ -36,14 +36,16 @@ import {
     MovieName,
     Job
 } from './styled';
-import {useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCast, selectCrew, selectMovieDetails, selectMovieStatus } from './movieSlice';
 import { fetchCredits, fetchMovie } from './apiMovie';
 import Error from '../Error';
 import NoResults from '../NoResults';
 import store from '../store';
-
+import { selectLanguage } from '../LanguageSelect/languageSlice';
+import { companies, production, releaseDate, votes, castDetail, crewDetail } from '../language';
+import ReadMoreButton from '../ReadMoreButton';
 
 const MovieDetail = () => {
 
@@ -60,11 +62,12 @@ const MovieDetail = () => {
     const crew = useSelector((state) => selectCrew(state));
     console.log("Wynik crew:", selectCrew(store.getState()))
     const status = useSelector((state) => selectMovieStatus(state));
+    const language = useSelector(selectLanguage);
 
     useEffect(() => {
-        dispatch(fetchMovie(movieId));
-        dispatch(fetchCredits(movieId));
-    }, [dispatch, movieId]);
+        dispatch(fetchMovie(movieId, language));
+        dispatch(fetchCredits(movieId, language));
+    }, [dispatch, movieId, language]);
 
     if (status === "loading") {
         return <div>Loading..</div>
@@ -94,7 +97,7 @@ const MovieDetail = () => {
                                 </IconBcg>
                                 <AverageBcg><span>{movie.vote_average ? movie.vote_average.toFixed(1) : undefined}</span> / 10</AverageBcg>
                             </IconAndAverage>
-                            <VotesBcg>{movie.vote_count} votes</VotesBcg>
+                            <VotesBcg>{movie.vote_count} {votes[language]}</VotesBcg>
                         </Rating>
                     </TitleAndRating>
                 </MainPoster>
@@ -108,15 +111,15 @@ const MovieDetail = () => {
                         <Title>{movie.title}</Title>
                         <Year>{movie.release_date ? movie.release_date.slice(0, 4) : "No information"}</Year>
                         <ProductionDateAndCompanies>
-                            <Production><span>Production:</span> {movie.production_countries ? movie.production_countries.map(country => country.name).join(', ') : "No information"}  </Production>
-                            <Companies><span>Companies:</span> {movie.production_companies ? movie.production_companies.map(company => company.name).join(', ') : "No information"}</Companies>
-                            <ReleaseDate><span>Release date:</span> {movie.release_date} </ReleaseDate>
+                            <Production><span>{production[language]}:</span> {movie.production_countries ? movie.production_countries.map(country => country.name).join(', ') : "No information"}  </Production>
+                            <Companies><span>{companies[language]}:</span> o{movie.production_companies ? movie.production_companies.map(company => company.name).join(', ') : "No information"}</Companies>
+                            <ReleaseDate><span>{releaseDate[language]}:</span> {movie.release_date} </ReleaseDate>
                         </ProductionDateAndCompanies>
                         <Genres>
-                        {movie.genres ? movie.genres.map((genre) => (
-                            <Genre key={genre.id}>{genre.name}</Genre>
-                        )) : undefined}
-                       </Genres>
+                            {movie.genres ? movie.genres.map((genre) => (
+                                <Genre key={genre.id}>{genre.name}</Genre>
+                            )) : undefined}
+                        </Genres>
                         <Rating>
                             <Icon>
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -124,13 +127,17 @@ const MovieDetail = () => {
                                 </svg>
                             </Icon>
                             <Average><span>{movie.vote_average ? movie.vote_average.toFixed(1) : "No information"}</span> / 10</Average>
-                            <Votes>{movie.vote_count} votes</Votes>
+                            <Votes>{movie.vote_count} {votes[language]}</Votes>
                         </Rating>
-                        <Overview>{movie.overview}</Overview>
+                        <Overview>
+                            {movie.overview ? (
+                                <ReadMoreButton content={movie.overview} />
+                            ) : ""}
+                        </Overview>
                     </Informations>
                 </Details>
                 <Cast>
-                    <CastTitle>Cast</CastTitle>
+                    <CastTitle>{castDetail[language]}</CastTitle>
                     <People>
                         {cast.map((cast) => (
                             <>
@@ -147,7 +154,7 @@ const MovieDetail = () => {
                     </People>
                 </Cast>
                 <Crew>
-                    <CastTitle>Crew</CastTitle>
+                    <CastTitle>{crewDetail[language]}</CastTitle>
                     <People>
                         {crew.map((crew) => (
                             <>

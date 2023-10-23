@@ -22,6 +22,8 @@ import { selectMoviesTotalPages, selectMoviesError, selectMoviesLoading, selectM
 import { fetchMovies } from '../apiMovies';
 import { useQueryParamater } from '../../queryParameters';
 import searchQueryParamName from '../../searchQueryParamName';
+import { selectLanguage } from '../../LanguageSelect/languageSlice';
+import { popularMovies, searchResultsFor, votes } from '../../language';
 
 const MoviesList = () => {
 
@@ -34,12 +36,11 @@ const MoviesList = () => {
     const totalResults = useSelector(selectMoviesTotalResults);
     const isLoading = useSelector(selectMoviesLoading);
     const isError = useSelector(selectMoviesError);
+    const language = useSelector(selectLanguage);
 
-
- 
     useEffect(() => {
-        fetchMovies(dispatch, pageQuery, searchQuery)
-    }, [dispatch, pageQuery, searchQuery]);
+        fetchMovies(dispatch, pageQuery, searchQuery, language);
+    }, [dispatch, pageQuery, searchQuery, language]);
 
     if (isLoading) {
         return <div>Loading..</div>
@@ -52,7 +53,7 @@ const MoviesList = () => {
     return (
         <Container>
             <ContainerTitle>
-                {searchQuery ? `Search results for "${searchQuery}" (${totalResults})` : "Popular movies"}
+                {searchQuery ? `${searchResultsFor[language]} "${searchQuery}" (${totalResults})` : popularMovies[language]}
             </ContainerTitle>
             <MoviesBar>
                 {movies.map((movie) => (
@@ -78,7 +79,7 @@ const MoviesList = () => {
                                         {movie.vote_average}
                                     </Value>
                                     <Votes>
-                                        {movie.vote_count} votes
+                                        {movie.vote_count} {votes[language]}
                                     </Votes>
                                 </Rating>
                             </Descirption>

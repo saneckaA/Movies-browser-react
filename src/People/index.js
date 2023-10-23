@@ -5,8 +5,11 @@ import Pagination from '../Pagination';
 import pageQueryParamName from '../pageQueryParamName';
 import { useDispatch, useSelector } from 'react-redux';
 import { useQueryParamater } from '../queryParameters';
-import { selectPeople, selectPeopleLoading, selectPeopleTotalPages } from './peopleSlice';
+import { selectPeople, selectPeopleLoading, selectPeopleTotalPages, selectPeopleTotalResults } from './peopleSlice';
 import { fetchPeople } from './apiPeople';
+import searchQueryParamName from '../searchQueryParamName';
+import { selectLanguage } from '../LanguageSelect/languageSlice';
+import { popularPeople, searchResultsFor } from '../language';
 
 const People = () => {
 
@@ -17,10 +20,13 @@ const People = () => {
     const currentPage = +useQueryParamater(pageQueryParamName) || 1;
     const pageQuery = +useQueryParamater(pageQueryParamName) || 1;
     const totalPages = useSelector(selectPeopleTotalPages);
+    const searchQuery = useQueryParamater(searchQueryParamName) || "";
+    const totalResults = useSelector(selectPeopleTotalResults);
+    const language = useSelector(selectLanguage);
 
     useEffect(() => {
-        fetchPeople(dispatch, pageQuery)
-    }, [dispatch, pageQuery]);
+        fetchPeople(dispatch, pageQuery, searchQuery)
+    }, [dispatch, pageQuery, searchQuery]);
 
     if (isLoading) {
         return <div>Loading..</div>
@@ -33,7 +39,7 @@ const People = () => {
     return (
         <Container>
             <Title>
-                Popular people
+              {searchQuery ? `${searchResultsFor[language ]}  "${searchQuery}" (${totalResults})` : popularPeople[language]} 
             </Title>
             <FamousPeople>
                 {people ? people.map((person) => (
@@ -52,6 +58,9 @@ const People = () => {
                 currentPage={currentPage}
                 pageQueryParamName={pageQueryParamName}
                 totalPages={totalPages}
+                searchQueryParamName={searchQueryParamName}
+                searchQuery={searchQuery}
+               
             />
         </Container>
     )

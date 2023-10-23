@@ -8,17 +8,22 @@ import {
     Movies,
     People,
     ThemeButton,
-    Language,
     HeaderContainer,
     NavigationContainer,
     TitleImg,
-    TitleContainer
+    TitleContainer,
+    Extras,
 } from "./styled";
-
-import { useLocation } from "react-router-dom";
 import SearchResults from "../SearchResults";
+import LanguageSelect from "../LanguageSelect";
+import { useSelector } from "react-redux";
+import { selectLanguage } from "../LanguageSelect/languageSlice";
+import { moviesNavigation, peopleNavigation } from "../language";
+
 
 const Header = () => {
+
+    const language = useSelector(selectLanguage);
 
     return (
         <Container>
@@ -31,10 +36,10 @@ const Header = () => {
                 </TitleContainer>
                 <NavigationContainer>
                     <Movies activeClassName="active" to="/movies">
-                        Movies
+                        {moviesNavigation[language]}
                     </Movies>
                     <People activeClassName="active" to="/people">
-                        People
+                        {peopleNavigation[language]}
                     </People>
                 </NavigationContainer>
                 <SearchResults />
@@ -42,9 +47,10 @@ const Header = () => {
             <ThemeButton>
                 Button
             </ThemeButton>
-            <Language>
-                Language
-            </Language>
+            <Extras>
+                <LanguageSelect />
+            </Extras>
+
         </Container>
     )
 }

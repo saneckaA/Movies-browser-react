@@ -31,10 +31,12 @@ import ReadMoreButton from '../ReadMoreButton';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCredits, fetchPerson } from './apiPerson';
 import { selectCast, selectCastLength, selectCrew, selectCrewLength, selectPersonDetails, selectPersonStatus } from './personSlice';
-import store from './store';
+import store from '../store';
 import NoResults from '../NoResults';
 import Error from '../Error';
 import Genres from '../Genres';
+import { selectLanguage } from '../LanguageSelect/languageSlice';
+import { dateOfBirth, moviesCast, moviesCrew, placeOfBirth, votes } from '../language';
 
 const PersonDetail = () => {
 
@@ -53,11 +55,12 @@ const PersonDetail = () => {
     const status = useSelector((state) => selectPersonStatus(state));
     const castLength = useSelector(selectCastLength);
     const crewLength = useSelector(selectCrewLength);
+    const language = useSelector(selectLanguage);
 
     useEffect(() => {
-        dispatch(fetchPerson(personId));
-        dispatch(fetchCredits(personId));
-    }, [dispatch, personId]);
+        dispatch(fetchPerson(personId, language));
+        dispatch(fetchCredits(personId, language));
+    }, [dispatch, personId, language]);
 
     if (status === "loading") {
         return <div>Loading..</div>
@@ -75,8 +78,8 @@ const PersonDetail = () => {
                 <Information>
                     <Name>{person.name}</Name>
                     <Birth>
-                        <Date><span>Date of birth:</span> {person.birthday ? person.birthday : "No information"} </Date>
-                        <Place><span>Place of birth:</span> {person.place_of_birth ? person.place_of_birth : "No information"} </Place>
+                        <Date><span>{dateOfBirth[language]}:</span> {person.birthday ? person.birthday : "No information"} </Date>
+                        <Place><span>{placeOfBirth[language]}:</span> {person.place_of_birth ? person.place_of_birth : "No information"} </Place>
                     </Birth>
                     <Overview>
                         {person.biography ? (
@@ -86,7 +89,7 @@ const PersonDetail = () => {
                 </Information>
             </Details>
             <MoviesCast>
-                <HeaderName>Movies - cast ({castLength})</HeaderName>
+                <HeaderName>{moviesCast[language]} ({castLength})</HeaderName>
                 <Movies>
                     {cast.map((cast) => (
                         <>
@@ -110,7 +113,7 @@ const PersonDetail = () => {
                                         {cast.vote_average.toFixed(1)}
                                     </Average>
                                     <Votes>
-                                        {cast.vote_count} votes
+                                        {cast.vote_count} {votes[language]}
                                     </Votes>
                                 </Rating>
                             </Movie>
@@ -119,7 +122,7 @@ const PersonDetail = () => {
                 </Movies>
             </MoviesCast>
             <MoviesCrew>
-                <HeaderName>Movies - crew ({crewLength})</HeaderName>
+                <HeaderName>{moviesCrew[language]} ({crewLength})</HeaderName>
                 <Movies>
                     {crew.map((crew) => (
                         <>
@@ -145,7 +148,7 @@ const PersonDetail = () => {
                                         {crew.vote_average.toFixed(1)}
                                     </Average>
                                     <Votes>
-                                        {crew.vote_count} votes
+                                        {crew.vote_count} {votes[language]}
                                     </Votes>
                                 </Rating>
                             </Movie>
