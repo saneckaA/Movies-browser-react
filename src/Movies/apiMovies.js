@@ -1,13 +1,15 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { setError, setLoading, setMovies, setTotalPages, setTotalResults } from "./moviesSlice";
+import { useSelector } from "react-redux";
+import { selectLanguage } from "../LanguageSelect/languageSlice";
 
 const apiUrl = "https://api.themoviedb.org/3/";
 const apiKey = "75950885b0db888f999efec40cdae6e8";
 
-export const fetchMovies = async (dispatch, pageQuery, searchQuery) => {
+export const fetchMovies = async (dispatch, pageQuery, searchQuery, language) => {
 
-    let url = `${apiUrl}${searchQuery ? "search/movie" : "movie/popular"}?api_key=${apiKey}&page=${pageQuery}&query=${searchQuery}`;
+    let url = `${apiUrl}${searchQuery ? "search/movie" : "movie/popular"}?api_key=${apiKey}&language=${language}&page=${pageQuery}&query=${searchQuery}`;
 
     try {
         const response = await axios.get(url);
@@ -26,11 +28,12 @@ export const useGenres = () => {
     const [genres, setGenres] = useState([]);
     const [isLoadingGen, setIsLoadingGen] = useState(true);
     const [isErrorGen, setIsErrorGen] = useState(null);
+    const language = useSelector(selectLanguage)
 
     useEffect(() => {
         const fetchGenres = async () => {
-            const url = `${apiUrl}genre/movie/list?api_key=${apiKey}`;
-
+            const url = `${apiUrl}genre/movie/list?api_key=${apiKey}&language=${language}`;
+             
             try {
                 const response = await axios.get(url);
                 console.log("Genres:", response.data.genres)
@@ -48,10 +51,12 @@ export const useGenres = () => {
             }
         };
 
-        fetchGenres();
+         fetchGenres();
     }, []);
 
     return { genres, isLoadingGen, isErrorGen }
 };
+
+
 
 
