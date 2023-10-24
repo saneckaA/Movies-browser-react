@@ -9,10 +9,11 @@ export const Types = styled.div`
 `;
 
 export const Type = styled.div`
-   background: rgba(228, 230, 240, 1);
+   background: ${({theme}) => theme.genresContainer};
    border-radius: 5px;
    font-size: 14px;
    font-weight: 400;
    line-height: 19.6px;
    padding: 8px 16px 8px 16px;
+   color: ${({theme}) => theme.genresTextColor};
 `;

@@ -20,6 +20,7 @@ export const Title = styled.div`
    font-size: 36px;
    line-height: 43.2px;
    margin-bottom: 20px;
+   color: ${({theme}) => theme.infoTextColor};
 `;
 
 export const SubTitle = styled.div`
@@ -28,6 +29,7 @@ export const SubTitle = styled.div`
    line-height: 28.6px;
    margin-bottom: 20px;
    text-align: center;
+   color: ${({theme}) => theme.infoTextColor};
 `;
 
 export const Button = styled.div`

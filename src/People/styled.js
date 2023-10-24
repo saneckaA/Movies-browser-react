@@ -12,7 +12,7 @@ export const Title = styled.div`
    font-weight: 600;
    font-size: 36px;
    line-height: 43.2px;
-   color: rgba(24, 24, 27, 1);
+   color: ${({theme}) => theme.infoTextColor};
    padding-top: 40px;
 `;
 
@@ -28,11 +28,12 @@ export const FamousPeople = styled.div`
 export const Person = styled(Link)`
    width: 208px;
    height: 359px;
-   background: white;
+   background: ${({theme}) => theme.infoContainerColor};
    display: flex;
    flex-direction: column;
-   box-shadow: rgba(186, 199, 213, 0.5) 0px 4px 12px;
+   box-shadow: ${({theme}) => theme.boxShadowColor};
    text-decoration: none;
+   border: 1px solid rgb(168, 165, 165);
    transition: 0.3s all;
     &:hover {
       opacity: 0.8;
@@ -43,12 +44,12 @@ export const Person = styled(Link)`
 export const Image = styled.div`
    width: 177px;
    height: 264px;
-   background: grey;
+   background: ${({theme}) => theme.backgroundImage};
    margin-top: 14px;
    margin-left: 14px;
-   box-shadow: rgba(186, 199, 213, 0.5) 0px 4px 12px;
+   box-shadow: ${({theme}) => theme.boxShadowColor};
 
-    img {
+   img {
       width: 177px;
       height: 264px;
       margin-bottom: 14px;
@@ -61,6 +62,6 @@ export const Name = styled.div`
    font-size: 22px;
    line-height: 28.6px;
    text-align: center;
-   color: rgba(24, 24, 27, 1);
+   color: ${({theme}) => theme.infoTextColor};
    margin-top: 12px;
 `;

@@ -8,7 +8,7 @@ export const Container = styled.div`
 export const BcgContainer = styled.div`
   height: 770px;
   width: 100%;
-  background: black;
+  background: ${({ theme }) => theme.backdropBackground};
 `;
 
 export const MainPoster = styled.div`
@@ -75,7 +75,7 @@ export const IconBcg = styled.div`
 `;
 
 export const AverageBcg = styled.div`
-   color: white;
+   color: ${({ theme }) => theme.textColor};
    font-weight: 500;
    font-size: 16px;
    line-height: 19.2px;
@@ -89,18 +89,17 @@ export const AverageBcg = styled.div`
 `;
 
 export const VotesBcg = styled.div`
-   color: white;
+   color: ${({ theme }) => theme.movieDetailBcgText};
    font-weight: 500;
    font-size: 16px;
    line-height: 19.2px;
 `;
 
 export const MovieTitle = styled.h1`
-   color: white;
+   color: ${({ theme }) => theme.movieDetailBcgText};
    font-weight: 600;
    font-size: 64px;
    line-height: 76.8px;
-
    z-index: 1;
 `;
 
@@ -113,31 +112,31 @@ export const InfoBar = styled.div`
    display: flex;
    flex-direction: column;
    gap: 40px;
-
 `;
 
 export const Details = styled.div`
-   background: white;
+   background: ${({theme}) => theme.infoContainerColor};
    height: auto;
    width: 100%;
-   box-shadow: rgba(186, 199, 213, 0.5) 0px 4px 12px;
+   box-shadow: ${({theme}) => theme.boxShadowColor};
    display: flex;
    flex-direction: row;
    gap: 40px;
+   border: 1px solid white;
 `;
 
 export const Poster = styled.div`
    margin-top: 40px;
    margin-left: 40px;
    margin-bottom: 40px;
-   background: grey;
+   background: ${({theme}) => theme.backgroundImage};
    height: 464px;
    
   img {
    height: 464px;
    width: 312px;
-   background: grey;
    border-radius: 5px;
+   border: 1px solid white;
   }
    
 `;
@@ -157,25 +156,29 @@ export const Title = styled.div`
     font-weight: 600;
     font-size: 36px;
     line-height: 43.2px;
+    color: ${({theme}) => theme.infoTextColor};
 `;
 
 export const Year = styled.div`
    font-weight: 400;
    font-size: 22px;
    line-height: 26.4px;
+   color: ${({theme}) => theme.infoTextColor};
 `;
 
 export const ProductionDateAndCompanies = styled.div`
    display: flex;
    flex-direction: column;
    gap: 12px;
+   color: ${({theme}) => theme.infoTextColor};
 `;
+
 export const Production = styled.div`
    font-weight: 400;
    font-size: 18px;
    line-height: 21.6px;
    span {
-    color: rgba(116, 120, 139, 1);
+    color: ${({theme}) => theme.greyText};
    }
 `;
 
@@ -194,10 +197,10 @@ export const Genres = styled.div`
 `;
 
 export const Genre = styled.div`
-   background: rgba(228, 230, 240, 1);
+   background: ${({theme}) => theme.genresContainer};
    border-radius: 5px;
    padding: 8px 16px 8px 16px;
-   color: rgba(24, 24, 27, 1);
+   color: ${({theme}) => theme.genresTextColor};
 `;
 
 export const Rating = styled.div`
@@ -209,7 +212,6 @@ export const Rating = styled.div`
      display: flex;
      flex-direction: column;
      gap: 12px;
-   
    `}
 `;
 
@@ -218,8 +220,6 @@ export const IconAndAverage = styled.div`
    flex-direction: row;
    gap: 10px;
    align-items: center;
-
-  
 `;
 
 export const Icon = styled.div`
@@ -232,10 +232,10 @@ export const Average = styled.div`
    font-weight: 500;
    font-size: 14px;
    line-height: 16.8px;
-   color: rgba(0, 0, 0, 1);
-    height: 100%;
-    display: flex;
-    align-items: center;
+   color: ${({theme}) => theme.infoTextColor};
+   height: 100%;
+   display: flex;
+   align-items: center;
 
    span {
       font-weight: 600;
@@ -248,7 +248,7 @@ export const Votes = styled.div`
    font-weight: 500;
    font-size: 14px;
    line-height: 16.8px;
-   color: rgba(0, 0, 0, 1);
+   color: ${({theme}) => theme.infoTextColor};
    height: 100%;
    display: flex;
    align-items: center;
@@ -258,6 +258,7 @@ export const Overview = styled.div`
    font-weight: 400;
    font-size: 20px;
    line-height: 32px;
+   color: ${({theme}) => theme.infoTextColor};
 `;
 
 export const Cast = styled.div`
@@ -269,7 +270,7 @@ export const CastTitle = styled.div`
    font-weight: 600;
    font-size: 36px;
    line-height: 43.2px;
-   color: rgba(0, 0, 0, 1);
+   color: ${({theme}) => theme.infoTextColor};
    margin-bottom: 20px;
 `;
 
@@ -282,11 +283,12 @@ export const People = styled.div`
 export const Person = styled(Link)`
    width: 208px;
    height: 359px;
-   background: white;
+   background: ${({theme}) => theme.infoContainerColor};
    display: flex;
    flex-direction: column;
-   box-shadow: rgba(186, 199, 213, 0.5) 0px 4px 12px;
+   box-shadow: ${({theme}) => theme.boxShadowColor};
    text-decoration: none;
+   border: 1px solid white;
    color: black;
    transition: 0.3s all;
     &:hover {
@@ -296,12 +298,12 @@ export const Person = styled(Link)`
 `;
 
 export const Image = styled.div`
- 
     img {
     width: 177px;
     height: 234px;
     border-radius: 5px;
-    background: grey;
+
+    background: ${({theme}) => theme.backgroundImage};
     margin-top: 14px;
     margin-left: 14px; 
     }
@@ -313,23 +315,21 @@ export const RealName = styled.div`
    line-height: 28.6px;
    text-align: center;
    margin-top: 12px;
+   color: ${({theme}) => theme.infoTextColor}
 `;
 
 export const MovieName = styled.div`
    font-weight: 400;
    font-size: 18px;
    line-height: 27px;
-   color: rgba(126, 131, 154, 1);
+   color: ${({theme}) => theme.greyText};
    text-align: center;
 `;
 
 export const Crew = styled.div`
-    height: auto;
-    width: 100%;
-
-
+   height: auto;
+   width: 100%;
 `;
 
 export const Job = styled(MovieName)`
-
 `;

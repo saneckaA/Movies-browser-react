@@ -13,6 +13,7 @@ export const ContainerTitle = styled.div`
    font-size: 36px;
    line-height: 43.2px;
    padding-top: 56px;
+   color: ${({theme}) => theme.infoTextColor}
 `;
 
 export const MoviesBar = styled.div`
@@ -31,10 +32,11 @@ export const Movie = styled(Link)`
    width: 324px;
    height: 700px;
    border-radius: 5px;
-   background: #fff;
-   box-shadow: rgba(186, 199, 213, 0.5) 0px 4px 12px;
+   border: 0.5px solid white;
+   background: ${({theme}) => theme.infoContainerColor};
+   box-shadow: ${({theme}) => theme.boxShadowColor};
    text-decoration: none;
-   color: black;
+   color: ${({theme}) => theme.infoTextColor};
    transition: 0.3s all;
     &:hover {
       opacity: 0.8;
@@ -48,7 +50,7 @@ export const Movie = styled(Link)`
     margin-left: 16px;
     margin-bottom: 16px;
     border-radius: 5px;
-    background: grey;
+    background: ${({theme}) => theme.backgroundImage};
    }
 `;
 
@@ -70,7 +72,7 @@ export const MovieTitle = styled.h2`
    font-weight: 600;
    line-height: 29px;
    margin-top: -5px;
-   color: rgba(24, 24, 27, 1);
+   color: ${({theme}) => theme.infoTextColor};
 `;
 
 export const MovieYear = styled.div`
@@ -78,7 +80,7 @@ export const MovieYear = styled.div`
    font-weight: 400;
    line-height: 24px;
    margin-top: -10px;
-   color: rgba(126, 131, 154, 1);
+   color: ${({theme}) => theme.greyText};
 `;
 
 export const Rating = styled.div`
@@ -107,5 +109,5 @@ export const Votes = styled.div`
    font-weight: 400;
    font-size: 16px;
    line-height: 24px;
-   color: rgba(126, 131, 154, 1);
+   color: ${({theme}) => theme.greyText};
 `;

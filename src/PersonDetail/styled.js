@@ -18,7 +18,8 @@ export const Details = styled.div`
    display: flex;
    flex-direction: row;
    gap: 24px;
-   background: white;
+   background: ${({theme}) => theme.infoContainerColor};
+   border: 1px solid white;
 `;
 
 export const Image = styled.div`
@@ -27,7 +28,7 @@ export const Image = styled.div`
    margin-top: 40px;
    margin-left: 40px;
    margin-bottom: 40px;
-   background: grey;
+   background: ${({theme}) => theme.backgroundImage};
 
    img {
     width: 399px;
@@ -50,6 +51,7 @@ export const Name = styled.div`
    font-weight: 600;
    font-size: 36px;
    line-height: 43.2px;
+   color: ${({theme}) => theme.infoTextColor};
 `;
 
 export const Birth = styled.div`
@@ -62,9 +64,9 @@ export const Date = styled.div`
    font-weight: 400;
    font-size: 18px;
    line-height: 21.6px;
-   color: rgba(0, 0, 0, 1);
+   color: ${({theme}) => theme.infoTextColor};
    span {
-    color: rgba(116, 120, 139, 1);
+    color: ${({theme}) => theme.greyText};
    }
 `;
 
@@ -75,7 +77,7 @@ export const Overview = styled.div`
    font-weight: 400;
    font-size: 20px;
    line-height: 32px;
-   color: rgba(0, 0, 0, 1);
+   color: ${({theme}) => theme.infoTextColor};
 `;
 
 export const MoviesCast = styled.div`
@@ -101,14 +103,15 @@ export const Movies = styled.div`
 `;
 
 export const Movie = styled(Link)`
-   background: white;
+   background: ${({theme}) => theme.infoContainerColor};
    position: relative;
    width: 324px;
    height: 690px;
    border-radius: 5px;
-   box-shadow: rgba(186, 199, 213, 0.5) 0px 4px 12px;
+   border: 1px solid white;
+   box-shadow: ${({theme}) => theme.boxShadowColor};
    text-decoration: none;
-   color: black;
+   color: ${({theme}) => theme.infoTextColor};
    transition: 0.3s all;
     &:hover {
       opacity: 0.8;
@@ -123,7 +126,7 @@ export const Poster = styled.div`
    margin-left: 16px;
    margin-bottom: 16px;
    border-radius: 5px;
-   background: grey;
+   background: ${({theme}) => theme.backgroundImage};
 
   img {
     width: 292px;
@@ -151,7 +154,7 @@ export const CharacterAndYear = styled.div`
    font-size: 16px;
    font-weight: 400;
    line-height: 24px;
-   color: rgba(126, 131, 154, 1);
+   color: ${({theme}) => theme.greyText};
    margin-top: 8px;
 `;
 
@@ -164,7 +167,7 @@ export const Types = styled.div`
 `;
 
 export const Type = styled.div`
-   background: rgba(228, 230, 240, 1);
+   background: ${({theme}) => theme.genresContainer};
    border-radius: 5px;
    font-size: 14px;
    font-weight: 400;
@@ -205,7 +208,7 @@ export const Votes = styled.div`
    font-weight: 400;
    font-size: 16px;
    line-height: 24px;
-   color: rgba(126, 131, 154, 1);
+   color: ${({theme}) => theme.greyText}
 `;
 
 export const MoviesCrew = styled(MoviesCast)`
