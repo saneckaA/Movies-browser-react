@@ -1,17 +1,30 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
-import store from './Movies/store';
+import store from './store';
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      keepPreviousData: true,
+      staleTime: 1000 * 60,
+    },
+  },
+});
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Provider store={store} >
-      <App />
-    </Provider >
+    <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools />
+      <Provider store={store} >
+        <App />
+      </Provider >
+    </QueryClientProvider>
   </React.StrictMode>
 );
 
