@@ -33,7 +33,7 @@ export const Person = styled(Link)`
    flex-direction: column;
    box-shadow: ${({theme}) => theme.boxShadowColor};
    text-decoration: none;
-   border: 1px solid rgb(168, 165, 165);
+   border: 1px solid white;
    transition: 0.3s all;
     &:hover {
       opacity: 0.8;
@@ -53,7 +53,6 @@ export const Image = styled.div`
       width: 177px;
       height: 264px;
       margin-bottom: 14px;
-      border-radius: 5px;
     }
 `;
 
