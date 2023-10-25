@@ -121,7 +121,7 @@ export const next = {
 
 export const last = {
     "pl-PL": "Ostatnia",
-    "en-US": "last",
+    "en-US": "Last",
 };
 export const page = {
     "pl-PL": "Strona",
@@ -155,5 +155,5 @@ export const returnButton = {
 
 export const noResults = {
     "pl-PL": "Przepraszamy, brak wyników dla",
-    "en-US": "Sorry, there are no resultsz for",
+    "en-US": "Sorry, there are no results for",
 };
