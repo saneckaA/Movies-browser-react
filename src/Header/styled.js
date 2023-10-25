@@ -8,6 +8,7 @@ export const Container = styled.div`
    background: rgba(24, 24, 27, 1);
    display: flex;
    justify-content: center;
+   margin-right: 170px;
 `;
 
 export const HeaderContainer = styled.div`
@@ -16,6 +17,7 @@ export const HeaderContainer = styled.div`
    align-items: center;
    justify-content: space-between;
    flex-wrap: wrap;
+
 `;
 
 export const TitleContainer = styled.div`
@@ -89,26 +91,3 @@ export const People = styled(Movies)`
 
 `;
 
-export const ThemeButton = styled.button`
-   color: white;
-   width: 80px;
-   height: 40px;
-   background: black;
-   border: 1px solid white;
-   border-radius: 25px;
-   margin-left: 10px;
-   margin-right: 10px;
-   padding: 10px;
-   display: none;
-`;
-
-export const Language = styled.div`
-   color: black;
-   width: 100px;
-   height: 20px;
-   background: white;
-   border-radius: 25px;
-   padding: 10px;
-   text-align: center;
-   display: none;
-`;

@@ -1,27 +1,21 @@
-import React, { useState } from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-
+import React from "react";
+import SearchResults from "../SearchResults";
+import ExtrasHeader from "../ExtrasHeader";
 import {
     Container,
     Title,
     Movies,
     People,
-    ThemeButton,
     HeaderContainer,
     NavigationContainer,
     TitleImg,
     TitleContainer,
-    Extras,
 } from "./styled";
-import SearchResults from "../SearchResults";
-import LanguageSelect from "../LanguageSelect";
 import { useSelector } from "react-redux";
 import { selectLanguage } from "../LanguageSelect/languageSlice";
 import { moviesNavigation, peopleNavigation } from "../language";
 
-
-const Header = () => {
+const Header = ({ setTheme }) => {
 
     const language = useSelector(selectLanguage);
 
@@ -43,14 +37,8 @@ const Header = () => {
                     </People>
                 </NavigationContainer>
                 <SearchResults />
+                <ExtrasHeader setTheme={setTheme} />
             </HeaderContainer>
-            <ThemeButton>
-                Button
-            </ThemeButton>
-            <Extras>
-                <LanguageSelect />
-            </Extras>
-
         </Container>
     )
 }
