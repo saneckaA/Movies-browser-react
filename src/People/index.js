@@ -1,26 +1,28 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Title, FamousPeople, Person, Image, Name } from './styled';
-
 import Pagination from '../Pagination';
+import Loading from '../Loading';
+import SearchResultsLoading from '../SearchResultsLoading';
+import NoResults from '../NoResults';
+import Error from '../Error';
 import pageQueryParamName from '../pageQueryParamName';
+import searchQueryParamName from '../searchQueryParamName';
+import { Container, Title, FamousPeople, Person, Image, Name } from './styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { useQueryParamater } from '../queryParameters';
-import { selectPeople, selectPeopleLoading, selectPeopleTotalPages, selectPeopleTotalResults } from './peopleSlice';
 import { fetchPeople } from './apiPeople';
-import searchQueryParamName from '../searchQueryParamName';
+import { selectPeopleByQuery, selectPeopleLoading, selectPeopleTotalPages, selectPeopleTotalResults } from './peopleSlice';
 import { selectLanguage } from '../LanguageSelect/languageSlice';
 import { popularPeople, searchResultsFor } from '../language';
 
 const People = () => {
 
     const dispatch = useDispatch();
-    const people = useSelector(selectPeople);
-    const isLoading = useSelector(selectPeopleLoading);
-    const isError = useSelector(selectPeopleLoading);
-    const currentPage = +useQueryParamater(pageQueryParamName) || 1;
-    const pageQuery = +useQueryParamater(pageQueryParamName) || 1;
-    const totalPages = useSelector(selectPeopleTotalPages);
     const searchQuery = useQueryParamater(searchQueryParamName) || "";
+    const pageQuery = +useQueryParamater(pageQueryParamName) || 1;
+    const currentPage = +useQueryParamater(pageQueryParamName) || 1;
+    const people = useSelector(state => selectPeopleByQuery(state, searchQuery));
+    const isLoading = useSelector(selectPeopleLoading);
+    const totalPages = useSelector(selectPeopleTotalPages);
     const totalResults = useSelector(selectPeopleTotalResults);
     const language = useSelector(selectLanguage);
 
@@ -28,42 +30,49 @@ const People = () => {
         fetchPeople(dispatch, pageQuery, searchQuery)
     }, [dispatch, pageQuery, searchQuery]);
 
-    if (isLoading) {
-        return <div>Loading..</div>
-    }
-
-    if (isError) {
-        return <div>Error</div>
-    }
+    if (isLoading && !searchQuery) {
+        return <Loading />;
+    } else if (isLoading && searchQuery) {
+        return <SearchResultsLoading searchQuery={searchQuery} />
+    };
 
     return (
         <Container>
-            <Title>
-              {searchQuery ? `${searchResultsFor[language ]}  "${searchQuery}" (${totalResults})` : popularPeople[language]} 
-            </Title>
-            <FamousPeople>
-                {people ? people.map((person) => (
+            {!isLoading ? (
+                people.length ? (
                     <>
-                        <Person key={person.id} to={{
-                            pathname: "/personDetail",
-                            search: `?id=${person.id}`
-                        }}>
-                            <Image> <img src={person.profile_path ? `https://image.tmdb.org/t/p/original${person.profile_path}` : "images/Profile.png"} /></Image>
-                            <Name>{person.name}</Name>
-                        </Person>
+                        <Title>
+                            {searchQuery ? `${searchResultsFor[language]}  "${searchQuery}" (${totalResults})` : popularPeople[language]}
+                        </Title>
+                        <FamousPeople>
+                            {people ? people.map((person) => (
+                                <>
+                                    <Person key={person.id} to={{
+                                        pathname: "/personDetail",
+                                        search: `?id=${person.id}`
+                                    }}>
+                                        <Image> <img src={person.profile_path ? `https://image.tmdb.org/t/p/original${person.profile_path}` : "images/Profile.svg"} /></Image>
+                                        <Name>{person.name}</Name>
+                                    </Person>
+                                </>
+                            )) : undefined}
+                        </FamousPeople>
+                        <Pagination
+                            currentPage={currentPage}
+                            pageQueryParamName={pageQueryParamName}
+                            totalPages={totalPages}
+                            searchQueryParamName={searchQueryParamName}
+                            searchQuery={searchQuery}
+                        />
                     </>
-                )) : undefined}
-            </FamousPeople>
-            <Pagination
-                currentPage={currentPage}
-                pageQueryParamName={pageQueryParamName}
-                totalPages={totalPages}
-                searchQueryParamName={searchQueryParamName}
-                searchQuery={searchQuery}
-               
-            />
+                ) : (
+                    <NoResults searchQuery={searchQuery} />
+                )
+            ) : (
+                <Error />
+            )}
         </Container>
     )
-}
+};
 
 export default People;

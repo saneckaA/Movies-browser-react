@@ -4,7 +4,7 @@ const initialState = {
     person: [],
     cast: [],
     crew: [],
-    status: false,
+    loading: false,
     error: null,
 };
 
@@ -12,16 +12,11 @@ const personSlice = createSlice({
     name: 'person',
     initialState,
     reducers: {
-        setPerson: (state) => {
-            state.loading = "loading";
-            state.error = null;
-            console.log('Fetching person details started:', JSON.stringify(state, null, 2));
+        setLoading: (state, action) => {
+            state.loading = action.payload;
         },
-        setPersonSuccess: (state, action) => {
+        setPerson: (state, action) => {
             state.person = action.payload;
-            state.status = "success";
-            state.error = null;
-            console.log('Fetching person details succes:', JSON.stringify(state, null, 2))
         },
         setCast: (state, action) => {
             state.cast = action.payload;
@@ -31,22 +26,16 @@ const personSlice = createSlice({
         },
         setError: (state, action) => {
             state.error = action.payload;
-            state.status = "fail";
-        },
-        setNoResult: (state) => {
-            state.status = "noResult";
-            state.error = null;
         },
     },
 });
 
 export const {
     setPerson,
-    setPersonSuccess,
+    setLoading,
     setCast,
     setCrew,
     setError,
-    setNoResult
 } = personSlice.actions;
 
 const selectPersonState = state => state.person;
@@ -56,7 +45,7 @@ export const selectCast = state => selectPersonState(state).cast;
 export const selectCastLength = state => selectPersonState(state).cast.length;
 export const selectCrew = state => selectPersonState(state).crew;
 export const selectCrewLength = state => selectPersonState(state).crew.length;
-export const selectPersonStatus = state => selectPersonState(state).status;
+export const selectPersonLoading = state => selectPersonState(state).loading;
 export const selectPersonError = state => selectPersonState(state).error;
 
 export default personSlice.reducer;
