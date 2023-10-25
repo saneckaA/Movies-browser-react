@@ -1,15 +1,14 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-   width: 525px;
+   width: 700px;
    height: 36px;
    display: flex;
    flex-direction: row;
-   gap: 24px;
    align-items: center;
-   margin-right: auto;
-   margin-left: auto;
+   gap: 24px;
    margin-top: 30px;
+   margin-left: 425px;
 `;
 
 export const Prev = styled.div`
@@ -76,9 +75,7 @@ export const Previous = styled.button`
    }
 `;
 
-
 export const Pages = styled.div`
-
    height: 24px;
    font-weight: 400;
    font-size: 16px;
@@ -86,7 +83,7 @@ export const Pages = styled.div`
    color: rgba(126, 131, 154, 1);
 
    span {
-    color: rgba(24, 24, 27, 1);
+    color: ${({theme}) => theme.pagesPaginationColor};
     font-weight: 600;
    }
 `;

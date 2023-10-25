@@ -32,10 +32,10 @@ const Pagination = ({ currentPage, pageQueryParamName, totalPages, searchQueryPa
         <Container >
             <Prev>
                 <First onClick={onFirstButtonClick} disabled={disablePrev}>
-                    <img src="images/prev.svg" /> {first[language]}
+                    <img src={disablePrev ? "images/disablePrev.svg" : "images/Prev.svg"} /> {first[language]}
                 </First>
                 <Previous onClick={onPrevButtonClick} disabled={disablePrev}>
-                    <img src="images/prev.svg" /> {prev[language]}
+                    <img src={disablePrev ? "images/disablePrev.svg" : "images/Prev.svg"} /> {prev[language]}
                 </Previous>
             </Prev>
             <Pages>
@@ -43,10 +43,10 @@ const Pagination = ({ currentPage, pageQueryParamName, totalPages, searchQueryPa
             </Pages>
             <Nex>
                 <Next onClick={onNextButtonClick} disabled={disableNext}>
-                    {next[language]} <img src="images/next.svg" />
+                    {next[language]} <img src={disableNext ? "images/disableNext.svg" : "images/Next.svg"} />
                 </Next>
                 <Last onClick={onLastButtonClick} disabled={disableNext}>
-                    {last[language]} <img src="images/next.svg" />
+                    {last[language]} <img src={disableNext ? "images/disableNext.svg" : "images/Next.svg"} />
                 </Last>
             </Nex>
         </Container>
