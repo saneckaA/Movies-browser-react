@@ -1,13 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Switcher } from './styled';
 
 const ToggleThemeButton = ({setTheme}) => {
 
     const [isChecked, setIsChecked] = useState(true);
 
+    useEffect(() => {
+        const savedState = localStorage.getItem('checkboxState');
+        if (savedState !== null) {
+            setIsChecked(JSON.parse(savedState));
+        }
+    }, []);
+
     const handleCheckboxChange = () => {
         const updatedState = !isChecked;
         setIsChecked(updatedState);
+        localStorage.setItem('checkboxState', JSON.stringify(updatedState))
         setTheme();
     };
   return (

@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
+import { getThemeFromLocalStorage } from "./themeLocalStorage";
 
 export const useSwitchTheme = () => {
-    const [theme, setTheme] = useState('light');
+    const [theme, setTheme] = useState(getThemeFromLocalStorage);
 
     const toggleTheme = () => {
       if (theme === 'light') {
@@ -10,6 +11,11 @@ export const useSwitchTheme = () => {
         setTheme('light');
       }
     };
+
+    useEffect(() => {
+      localStorage.setItem("theme",
+      JSON.stringify(theme));
+    }, [theme]);
 
     return [
         theme,
