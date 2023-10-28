@@ -12,7 +12,6 @@ import {
     Icon,
     Value,
     Votes,
-    MediaContainer
 } from './styled';
 import Pagination from '../../Pagination';
 import Genres from '../../Genres';
@@ -65,10 +64,8 @@ const MoviesList = () => {
                                     pathname: "/movieDetail",
                                     search: `?id=${movie.id}`,
                                 }}>
-                                    <Poster>
-                                        <img src={movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : 'images/Video.svg'} />
-                                    </Poster>
-                                    <MediaContainer>
+                                    
+                                    <Poster src={movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : 'images/Video.svg'} />
                                         <Descirption>
                                             <MovieTitle>{movie.title}</MovieTitle>
                                             <MovieYear>{movie.release_date.slice(0, 4)}</MovieYear>
@@ -87,7 +84,7 @@ const MoviesList = () => {
                                                 </Votes>
                                             </Rating>
                                         </Descirption>
-                                    </MediaContainer>
+                                    
                                 </Movie>
                             ))
                             }

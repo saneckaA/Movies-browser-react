@@ -3,10 +3,9 @@ import ReadMoreButton from '../ReadMoreButton';
 import Loading from '../Loading';
 import Error from '../Error';
 import {
-    Container,
-    BcgContainer,
     MainPoster,
     TitleAndRating,
+    RatingBcg,
     IconBcg,
     AverageBcg,
     VotesBcg,
@@ -31,6 +30,7 @@ import {
     IconAndAverage,
     Votes,
     Overview,
+    MediaOverview,
     CastTitle,
     People,
     Person,
@@ -70,19 +70,19 @@ const MovieDetail = () => {
     };
 
     return (
-        <Container>
+        <>
             {isLoading ? (<Loading />) : (
                 <>
-                    <BcgContainer>
+                    
                         <MainPoster
-                            url={movie.backdrop_path
+                            src={movie.backdrop_path
                                 ? `https://image.tmdb.org/t/p/original${movie.backdrop_path}`
                                 : 'images.Video.svg'
                             }
                         >
                             <TitleAndRating>
                                 <MovieTitle>{movie.title}</MovieTitle>
-                                <Rating background>
+                                <RatingBcg>
                                     <IconAndAverage>
                                         <IconBcg>
                                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -92,15 +92,13 @@ const MovieDetail = () => {
                                         <AverageBcg><span>{movie.vote_average ? movie.vote_average.toFixed(1) : undefined}</span> / 10</AverageBcg>
                                     </IconAndAverage>
                                     <VotesBcg>{movie.vote_count} {votes[language]}</VotesBcg>
-                                </Rating>
+                                </RatingBcg>
                             </TitleAndRating>
                         </MainPoster>
-                    </BcgContainer>
+                    
                     <InfoBar >
                         <Details>
-                            <Poster>
-                                <img src={movie.poster_path ? `https://image.tmdb.org/t/p/original${movie.poster_path}` : 'images/Video.svg'} />
-                            </Poster>
+                            <Poster src={movie.poster_path ? `https://image.tmdb.org/t/p/original${movie.poster_path}` : 'images/Video.svg'} />
                             <Informations>
                                 <Title>{movie.title}</Title>
                                 <Year>{movie.release_date ? movie.release_date.slice(0, 4) : ""}</Year>
@@ -129,6 +127,11 @@ const MovieDetail = () => {
                                     ) : ""}
                                 </Overview>
                             </Informations>
+                            <MediaOverview>
+                                {movie.overview ? (
+                                    <ReadMoreButton content={movie.overview} />
+                                ) : ""}
+                            </MediaOverview>
                         </Details>
                         <Cast>
                             <CastTitle>{castDetail[language]}</CastTitle>
@@ -164,7 +167,7 @@ const MovieDetail = () => {
                     </InfoBar>
                 </>
             )}
-        </Container>
+        </>
     )
 }
 export default MovieDetail;

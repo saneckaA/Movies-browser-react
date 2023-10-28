@@ -10,9 +10,7 @@ const Error = () => {
 
     return (
         <Container>
-            <Image>
-                <img src="images/error.png" />
-            </Image>
+            <Image src="images/error.png" />
             <Title>
                 {errorTitle[language]}
             </Title>
@@ -24,6 +22,6 @@ const Error = () => {
             </Button>
         </Container>
     )
-}
+};
 
 export default Error;

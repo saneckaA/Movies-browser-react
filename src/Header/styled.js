@@ -4,11 +4,15 @@ const activeClassName = "link-active";
 
 export const Container = styled.div`
    min-height: 94px;
-   width: 100%;
+   height: auto;
+   width: auto;
    background: rgba(24, 24, 27, 1);
    display: flex;
    justify-content: center;
-   margin-right: 170px;
+   @media (max-width: 1200px) {
+    width: auto;
+    height: auto;
+   };
 `;
 
 export const HeaderContainer = styled.div`
@@ -17,7 +21,10 @@ export const HeaderContainer = styled.div`
    align-items: center;
    justify-content: space-between;
    flex-wrap: wrap;
-
+   @media (max-width: 1200px) {
+    width: auto;
+    justify-content: center;
+   }
 `;
 
 export const TitleContainer = styled.div`
@@ -61,7 +68,11 @@ export const NavigationContainer = styled.nav`
    margin-right: 150px;
    font-size: 16px;
    font-weight: 600;
-   flex-wrap: wrap;
+   @media (max-width: 767px) {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 8px;
+   }
 `;
 
 export const NavItem = styled(NavLink)`
@@ -78,6 +89,9 @@ export const NavItem = styled(NavLink)`
    &.active {
    border: 1px solid white;
    border-radius: 29px;
+   }
+   @media (max-width: 767px) {
+    margin-right: 0;
    }
 `;
 

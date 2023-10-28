@@ -2,6 +2,11 @@ import styled from "styled-components";
 
 export const Switcher = styled.div`
 margin-top: -4px;
+
+@media (max-width: 767px) {
+    margin-right: auto;
+    margin-left: auto;
+   }
 label {
    width: 100px;
    height: 50px;

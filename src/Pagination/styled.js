@@ -1,77 +1,104 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
-   width: 700px;
-   height: 36px;
-   display: flex;
-   flex-direction: row;
-   align-items: center;
-   gap: 24px;
-   margin-top: 30px;
-   margin-left: 425px;
+export const PaginationContainer = styled.div`
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  margin: 0 auto;
+  margin-top: 40px;
+  margin-bottom: 100px;
 `;
 
-export const Prev = styled.div`
-   display: flex;
-   flex-direction: row;
-   gap: 8px;
-`;
-
-export const Nex = styled.div`
-   display: flex;
-   flex-direction: row;
-   gap: 8px;
-`;
-
-export const First = styled.button`
-   border-radius: 5px;
-   padding: 8px 16px 8px 16px;
+export const PagiButton = styled.button`
    background: rgba(214, 228, 255, 1);
-   text-align: center;
-   font-weight: 400;
-   font-size: 14px;
-   line-height: 19.6px;
    display: flex;
-   flex-direction: row;
-   gap: 8px;
-   align-items: center;
-   border: none;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  margin: 0 6px;
+  outline: none;
+  border: 0;
+  border-radius: 5px;
+  color: black;
+  transition: 0.3s filter;
 
-   img {
-    width: 7px;
-    height: 11px;
-   }
+  &:hover {
+    filter: brightness(103%);
+    cursor: pointer;
+  }
 
-   &:disabled {
+  &:disabled {
     background: rgb(228, 230, 240);
     color: rgb(0, 0, 0);
     cursor: not-allowed;
+  }
+
+  @media (max-width: 767px) {
+    margin: 0 4px;
+    padding: 8px 12px;
    }
 `;
 
-export const Previous = styled.button`
-   border-radius: 5px;
-   padding: 8px 16px 8px 16px;
-   text-align: center;
-   background: rgba(214, 228, 255, 1);
+export const Text = styled.div`
    font-weight: 400;
    font-size: 14px;
    line-height: 19.6px;
-   display: flex;
-   flex-direction: row;
-   gap: 8px;
-   align-items: center;
-   border: none;
-
-   img {
-    width: 7px;
-    height: 11px;
+   text-align: center;
+   @media (max-width: 767px) {
+    display: none;
    }
+`;
 
-   &:disabled {
-    background: rgb(228, 230, 240);
-    color: rgb(0, 0, 0);
-    cursor: not-allowed;
+export const First = styled.img`
+  width: 7px;
+  margin-right: 8px;
+  @media (max-width: 767px) {
+   margin: 0 4px;
+   width: 5px;
+   }
+`;
+
+export const MobileFirst = styled.img`
+  display: none;
+  @media (max-width: 767px) {
+   display: inline;
+   width: 5px;
+   }
+`;
+
+export const Previous = styled.img`
+  width: 7px;
+  margin-right: 8px;
+  @media (max-width: 767px) {
+   margin: 0 4px;
+   width: 5px;
+   }
+`;
+
+export const Next = styled.img`
+  width: 7px;
+  margin-left: 8px;
+  @media (max-width: 767px) {
+   margin: 0 4px;
+   width: 5px;
+   }
+`;
+
+export const Last = styled.img`
+  width: 7px;
+  margin-left: 8px;
+  @media (max-width: 767px) {
+   margin: 0 4px;
+   width: 5px;
+   }
+`;
+
+export const MobileLast = styled.img`
+   display: none;
+   @media (max-width: 767px) {
+   display: inline;
+   width: 5px;
    }
 `;
 
@@ -86,56 +113,14 @@ export const Pages = styled.div`
     color: ${({theme}) => theme.pagesPaginationColor};
     font-weight: 600;
    }
-`;
-
-export const Next = styled.button`
-   border-radius: 5px;
-   padding: 8px 16px 8px 16px;
-   text-align: center;
-   background: rgba(214, 228, 255, 1);
-   font-weight: 400;
-   font-size: 14px;
-   line-height: 19.6px;
-   display: flex;
-   flex-direction: row;
-   gap: 8px;
-   align-items: center;
-   border: none;
-
-   img {
-    width: 7px;
-    height: 11px;
-   }
-
-   &:disabled {
-    background: rgb(228, 230, 240);
-    color: rgb(0, 0, 0);
-    cursor: not-allowed;
+   @media (max-width: 767px) {
+    margin: 0 4px;
+    font-size: 10px;
    }
 `;
 
-export const Last = styled.button`
-   border-radius: 5px;
-   padding: 8px 16px 8px 16px;;
-   text-align: center;
-   background: rgba(214, 228, 255, 1);
-   font-weight: 400;
-   font-size: 14px;
-   line-height: 19.6px;
-   display: flex;
-   flex-direction: row;
-   gap: 8px;
-   align-items: center;
-   border: none;
 
-   img {
-    width: 7px;
-    height: 11px;
-   }
 
-   &:disabled {
-    background: rgb(228, 230, 240);
-    color: rgb(0, 0, 0);
-    cursor: not-allowed;
-   }
-`;
+
+
+

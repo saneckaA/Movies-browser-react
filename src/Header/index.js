@@ -1,5 +1,5 @@
 import React from "react";
-import SearchResults from "../SearchResults";
+import SearchBar from "../SearchBar";
 import ExtrasHeader from "../ExtrasHeader";
 import {
     Container,
@@ -36,7 +36,7 @@ const Header = ({ setTheme }) => {
                         {peopleNavigation[language]}
                     </People>
                 </NavigationContainer>
-                <SearchResults />
+                <SearchBar />
                 <ExtrasHeader setTheme={setTheme} />
             </HeaderContainer>
         </Container>

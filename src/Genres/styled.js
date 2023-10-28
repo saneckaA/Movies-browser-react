@@ -6,6 +6,10 @@ export const Types = styled.div`
    gap: 10px;
    padding-top: 10px;
    flex-wrap: wrap;
+   @media (max-width: 1200px) {
+    gap: 8px;
+    padding-top: 6px;
+   }
 `;
 
 export const Type = styled.div`
@@ -16,4 +20,9 @@ export const Type = styled.div`
    line-height: 19.6px;
    padding: 8px 16px 8px 16px;
    color: ${({theme}) => theme.genresTextColor};
+   @media (max-width: 1200px) {
+    font-size: 10px;
+    line-height: 11px;
+    padding: 4px 8px 4px 8px;
+   }
 `;

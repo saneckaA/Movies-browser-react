@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, First, Previous, Pages, Next, Last, Prev, Nex } from './styled';
+import { PaginationContainer, PagiButton, Text, First, MobileFirst, Previous, Next, Last, MobileLast, Pages } from './styled';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectLanguage } from '../LanguageSelect/languageSlice';
@@ -29,27 +29,29 @@ const Pagination = ({ currentPage, pageQueryParamName, totalPages, searchQueryPa
     };
 
     return (
-        <Container >
-            <Prev>
-                <First onClick={onFirstButtonClick} disabled={disablePrev}>
-                    <img src={disablePrev ? "images/disablePrev.svg" : "images/Prev.svg"} /> {first[language]}
-                </First>
-                <Previous onClick={onPrevButtonClick} disabled={disablePrev}>
-                    <img src={disablePrev ? "images/disablePrev.svg" : "images/Prev.svg"} /> {prev[language]}
-                </Previous>
-            </Prev>
+        <PaginationContainer>
+            <PagiButton onClick={onFirstButtonClick} disabled={disablePrev}>
+                <First src={disablePrev ? "images/disablePrev.svg" : "images/Prev.svg"} />
+                <Text>{first[language]}</Text>
+                <MobileFirst src={disablePrev ? "images/disablePrev.svg" : "images/Prev.svg"} />
+            </PagiButton>
+            <PagiButton onClick={onPrevButtonClick} disabled={disablePrev}>
+                <Previous src={disablePrev ? "images/disablePrev.svg" : "images/Prev.svg"} />
+                <Text>{prev[language]}</Text>
+            </PagiButton>
             <Pages>
                 {page[language]} <span>{currentPage}</span> {ofPage[language]} <span>{totalPages}</span>
             </Pages>
-            <Nex>
-                <Next onClick={onNextButtonClick} disabled={disableNext}>
-                    {next[language]} <img src={disableNext ? "images/disableNext.svg" : "images/Next.svg"} />
-                </Next>
-                <Last onClick={onLastButtonClick} disabled={disableNext}>
-                    {last[language]} <img src={disableNext ? "images/disableNext.svg" : "images/Next.svg"} />
-                </Last>
-            </Nex>
-        </Container>
+            <PagiButton onClick={onNextButtonClick} disabled={disableNext}>
+                <Text>{next[language]}</Text>
+                <Next src={disableNext ? "images/disableNext.svg" : "images/Next.svg"} />
+            </PagiButton>
+            <PagiButton onClick={onLastButtonClick} disabled={disableNext}>
+                <Text>{last[language]}</Text>
+                <Last src={disableNext ? "images/disableNext.svg" : "images/Next.svg"} />
+                <MobileLast src={disableNext ? "images/disableNext.svg" : "images/Next.svg"} />
+            </PagiButton>
+        </PaginationContainer>
     )
 }
 

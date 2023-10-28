@@ -1,21 +1,9 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-export const Container = styled.div`
-   min-height: 1800px;
-`;
-
-export const BcgContainer = styled.div`
-  height: 770px;
-  width: 100%;
-  background: ${({ theme }) => theme.backdropBackground};
-`;
-
 export const MainPoster = styled.div`
-
-   height: 770px;
-   width: 100%;
    color: white;
+   background: black;
    background-image: linear-gradient(
       270deg,
       #000000 14.11%,
@@ -51,10 +39,21 @@ export const MainPoster = styled.div`
       rgba(0, 0, 0, 0.740286) 85.86%,
       #000000 92.87%
     ),
-    url(${({ url }) => url});
-  background-size: 1920px 770px, 1920px 770px, 1920px 770px, 1920px 770px, 1368px 769px;
+    url(${({ src }) => src});
+  background-size: 1920px 770px, 1920px 770px, 1920px 770px, 1920px 770px,
+    1368px 769px;
   background-repeat: no-repeat;
   background-position: center;
+  
+  @media (max-width: 1200px) {
+   background-size: 1040px 400px, 1040px 400px, 1040px 400px, 1040px 400px,
+      776px 400px;
+  }
+  @media (max-width: 767px) {
+   width: 100%;
+   background-size: 450px 188px, 450px 188px, 450px 188px, 450px 188px,
+      350px 188px;
+  }
 
 `;
 
@@ -64,14 +63,42 @@ export const TitleAndRating = styled.div`
    display: flex;
    flex-direction: column;
    justify-content: flex-end;
-   margin-right: auto;
-   margin-left: auto;
-   margin: 0 auto;
+   padding-left: 10px;
    padding-bottom: 56px;
+   margin-left: auto;
+   margin-right: auto;
+   @media (max-width: 1200px) {
+    width: 100%;
+    height: 300px;
+   }
+ 
+`;
+
+export const MovieTitle = styled.h1`
+   color: ${({ theme }) => theme.movieDetailBcgText};
+   font-weight: 600;
+   font-size: 64px;
+   line-height: 76.8px;
+   z-index: 1;
+   @media (max-width: 1200px) {
+     font-size: 28px;
+     line-height: 28.8px;
+   }
+`;
+
+export const RatingBcg = styled.div`
+   display: flex;
+     flex-direction: column;
+     gap: 12px;
 `;
 
 export const IconBcg = styled.div`
-
+    @media (max-width: 767px) {
+      svg {
+         width: 18px;
+         height: 18px;
+      }
+   }
 `;
 
 export const AverageBcg = styled.div`
@@ -85,7 +112,14 @@ export const AverageBcg = styled.div`
    font-size: 30px;
    line-height: 39px;
    }
-
+   @media (max-width: 767px) {
+      font-size: 14px;
+      line-height: 18.2px;
+      span {
+         font-size: 14px;
+      line-height: 18.2px;
+      }
+   }
 `;
 
 export const VotesBcg = styled.div`
@@ -93,52 +127,63 @@ export const VotesBcg = styled.div`
    font-weight: 500;
    font-size: 16px;
    line-height: 19.2px;
-`;
-
-export const MovieTitle = styled.h1`
-   color: ${({ theme }) => theme.movieDetailBcgText};
-   font-weight: 600;
-   font-size: 64px;
-   line-height: 76.8px;
-   z-index: 1;
+   @media (max-width: 767px) {
+      font-size: 14px;
+      line-height: 18.2px;
+   }
 `;
 
 export const InfoBar = styled.div`
-   height: 1863px;
    width: 1368px;
-   margin-left: auto;
-   margin-right: auto;
+   max-width: calc(100% - 2*12px);
    margin-top: 50px;
    display: flex;
+   margin-left: auto;
+   margin-right: auto;
    flex-direction: column;
+   align-content: center;
    gap: 40px;
+   @media (max-width: 1200px) {
+      width: 100%;
+   }
 `;
 
 export const Details = styled.div`
    background: ${({theme}) => theme.infoContainerColor};
-   height: auto;
-   width: 100%;
+   width: 1368px;
    box-shadow: ${({theme}) => theme.boxShadowColor};
    display: flex;
    flex-direction: row;
    gap: 40px;
    border: 1px solid white;
+   height: auto;
+   @media (max-width: 1200px) {
+   width: 100%;
+  }
+   @media (max-width: 767px) {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: 16px;
+    width: auto;
+    margin: 0px 20px 20px 20px;
+   }
 `;
 
-export const Poster = styled.div`
+export const Poster = styled.img`
    margin-top: 40px;
    margin-left: 40px;
    margin-bottom: 40px;
    background: ${({theme}) => theme.backgroundImage};
    height: 464px;
-   
-  img {
    height: 464px;
    width: 312px;
    border-radius: 5px;
    border: 1px solid white;
+  @media (max-width: 767px) {
+   height: 169px;
+   width: 114px;
+   margin: 16px 0px 0px 16px;   
   }
-   
 `;
 
 export const Informations = styled.div`
@@ -150,6 +195,14 @@ export const Informations = styled.div`
    display: flex;
    flex-direction: column;
    gap: 20px;
+   @media (max-width: 1200px) {
+      gap: 4px;
+      width: auto;
+      height: auto;
+   }
+   @media (max-width: 767px) {
+      margin: 16px 16px 0px 0px;
+   }
 `;
 
 export const Title = styled.div`
@@ -157,6 +210,10 @@ export const Title = styled.div`
     font-size: 36px;
     line-height: 43.2px;
     color: ${({theme}) => theme.infoTextColor};
+    @media (max-width: 767px) {
+      font-size: 16px;
+      line-height: 20.8px;
+   }
 `;
 
 export const Year = styled.div`
@@ -164,6 +221,10 @@ export const Year = styled.div`
    font-size: 22px;
    line-height: 26.4px;
    color: ${({theme}) => theme.infoTextColor};
+   @media (max-width: 767px) {
+      font-size: 13px;
+      line-height: 16.9px;
+   }
 `;
 
 export const ProductionDateAndCompanies = styled.div`
@@ -180,10 +241,19 @@ export const Production = styled.div`
    span {
     color: ${({theme}) => theme.greyText};
    }
+   @media (max-width: 767px) {
+      font-size: 12px;
+      line-height: 15.6px;
+      span {
+         display: none;
+      }
+   }
 `;
 
 export const Companies = styled(Production)`
-
+   @media (max-width: 767px) {
+      display: none;
+   }
 `;
 
 export const ReleaseDate = styled(Production)`
@@ -194,6 +264,10 @@ export const Genres = styled.div`
    display: flex;
    flex-direction: row;
    gap: 16px;
+   @media (max-width: 767px) {
+      gap: 8px;
+      flex-wrap: wrap;
+   }
 `;
 
 export const Genre = styled.div`
@@ -201,18 +275,21 @@ export const Genre = styled.div`
    border-radius: 5px;
    padding: 8px 16px 8px 16px;
    color: ${({theme}) => theme.genresTextColor};
+   @media (max-width: 767px) {
+      padding: 4px 8px 4px 8px;
+      font-size: 10px;
+      line-height: 11px;
+   }
 `;
 
 export const Rating = styled.div`
    display: flex;
    flex-direction: row;
    gap: 12px;
-
-   ${({ background }) => background && css`
-     display: flex;
-     flex-direction: column;
-     gap: 12px;
-   `}
+   @media (max-width: 767px) {
+      gap: 4px;
+      flex-wrap: wrap;
+   }
 `;
 
 export const IconAndAverage = styled.div`
@@ -226,12 +303,16 @@ export const Icon = styled.div`
    height: 100%;
    display: flex;
    align-items: center;
+   @media (max-width: 767px) {
+      width: 16px;
+      height: 16px;
+   }
 `;
 
 export const Average = styled.div`
    font-weight: 500;
-   font-size: 14px;
-   line-height: 16.8px;
+   font-size: 22px;
+   line-height: 28.9px;
    color: ${({theme}) => theme.infoTextColor};
    height: 100%;
    display: flex;
@@ -239,19 +320,29 @@ export const Average = styled.div`
 
    span {
       font-weight: 600;
-      font-size: 22px;
-      line-height: 28.6px;
+   }
+   @media (max-width: 767px) {
+      font-size: 13px;
+      line-height: 16.9px;
+      span {
+         font-size: 13px;
+         line-height: 16.9px;
+      }
    }
 `;
 
 export const Votes = styled.div`
    font-weight: 500;
-   font-size: 14px;
-   line-height: 16.8px;
+   font-size: 22px;
+   line-height: 28.9px;
    color: ${({theme}) => theme.infoTextColor};
    height: 100%;
    display: flex;
    align-items: center;
+   @media (max-width: 767px) {
+      font-size: 13px;
+      line-height: 16.9px;
+   }
 `;
 
 export const Overview = styled.div`
@@ -259,11 +350,32 @@ export const Overview = styled.div`
    font-size: 20px;
    line-height: 32px;
    color: ${({theme}) => theme.infoTextColor};
+   text-align: justify;
+   @media (max-width: 767px) {
+      display: none;
+   }
+`;
+
+export const MediaOverview = styled.div`
+   display: none;
+   @media (max-width: 767px) {
+      font-size: 14px;
+      line-height: 22.4px;
+      display: inline;
+      grid-column-start: 1;
+      grid-column-end: 3;
+      margin: 0px 16px 16px 16px;
+      text-align: justify;
+   }
 `;
 
 export const Cast = styled.div`
-   height: auto;
-   width: 100%;
+   width: 1368px;
+   max-width: calc(100% - 2*12px);
+   margin: auto;
+   @media (max-width: 767px) {
+    width: calc(100vw - 32px);
+   }
 `;
 
 export const CastTitle = styled.div`
@@ -272,12 +384,22 @@ export const CastTitle = styled.div`
    line-height: 43.2px;
    color: ${({theme}) => theme.infoTextColor};
    margin-bottom: 20px;
+   @media (max-width: 767px) {
+    font-size: 20px;
+    line-height: 24px;
+   }
 `;
 
 export const People = styled.div`
    display: grid;
    grid-template-columns: repeat(auto-fill, minmax(208px, 1fr));
    grid-gap: 24px;
+   justify-items: center;
+   @media (max-width: 767px) {
+      grid-template-columns: repeat(auto-fill, 136px);
+      grid-gap: 12px;
+      justify-content: center;
+   }
 `;
 
 export const Person = styled(Link)`
@@ -294,7 +416,14 @@ export const Person = styled(Link)`
     &:hover {
       opacity: 0.8;
       transform: scale(1.05);
+   };
+   @media (max-width: 767px) {
+      width: 136px;
+      height: 245px;
+      border-radius: 5px;
+      transition: none;
    }
+   
 `;
 
 export const Image = styled.div`
@@ -302,11 +431,19 @@ export const Image = styled.div`
     width: 177px;
     height: 234px;
     border-radius: 5px;
-
     background: ${({theme}) => theme.backgroundImage};
     margin-top: 14px;
     margin-left: 14px; 
-    }
+    };
+
+    @media (max-width: 767px) {
+      img {
+         width: 120px;
+         height: 178px;
+         margin-top: 7px;
+         margin-left: 7px;
+      }
+   }
 `;
 
 export const RealName = styled.div`
@@ -315,7 +452,12 @@ export const RealName = styled.div`
    line-height: 28.6px;
    text-align: center;
    margin-top: 12px;
-   color: ${({theme}) => theme.infoTextColor}
+   color: ${({theme}) => theme.infoTextColor};
+   @media (max-width: 767px) {
+      font-size: 14px;
+      line-height: 18.2px;
+      margin-top: 4px;
+   }
 `;
 
 export const MovieName = styled.div`
@@ -324,11 +466,14 @@ export const MovieName = styled.div`
    line-height: 27px;
    color: ${({theme}) => theme.greyText};
    text-align: center;
+   @media (max-width: 767px) {
+      font-size: 13px;
+      line-height: 16.9px;
+      margin-bottom: 7px;
+   }
 `;
 
-export const Crew = styled.div`
-   height: auto;
-   width: 100%;
+export const Crew = styled(Cast)`
 `;
 
 export const Job = styled(MovieName)`
