@@ -16,7 +16,7 @@ function App() {
 
   return (
     <HashRouter>
-      <ThemeProvider theme={theme === 'light' ? darkTheme : lightTheme}>
+      <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
         <GlobalStyle />
         <Header setTheme={setTheme} />
         <Routes >
