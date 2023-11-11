@@ -4,6 +4,7 @@ import movieReducer from './MovieDetail/movieSlice';
 import peopleReducer from './People/peopleSlice';
 import personReducer from './PersonDetail/personSlice';
 import languageReducer from './LanguageSelect/languageSlice';
+import themeReducer from './themeSlice';
 
 const store = configureStore({
     reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
         people: peopleReducer,
         person: personReducer,
         language: languageReducer,
+        theme: themeReducer,
     },
 });
 
