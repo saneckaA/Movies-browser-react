@@ -9,9 +9,9 @@ const ReadMoreButton = ({ content }) => {
     const [show, setShow] = useState(false);
     const language = useSelector(selectLanguage);
     
-    return content.length > 400 ? (
+    return content.length > 300 ? (
         <>
-            {show ? content : `${content.slice(0, 400)}...`}
+            {show ? content : `${content.slice(0, 300)}...`}
             <Button onClick={() => setShow((show) => !show)}> {show ? readLess[language] : readMore[language]}</Button>
         </>
     ) : (<>{content} </>)
