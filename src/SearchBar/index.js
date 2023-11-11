@@ -16,7 +16,7 @@ const SearchBar = () => {
   const query = useQueryParamater(searchQueryParamName);
   const replaceQueryParameter = useReplaceQueryParameter();
   const language = useSelector(selectLanguage);
-  const searchType = location.pathname.includes("movies");
+  const searchType = location.pathname.includes("movies") || location.pathname.includes("movieDetail");
 
   const onInputChange = ({ target }) => {
     const newSearchQuery = target.value.trim() !== "" ? target.value : "";
