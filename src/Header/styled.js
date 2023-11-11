@@ -62,12 +62,13 @@ export const SearchBar = styled.div`
    margin-right: 15px;
 `;
 
-export const NavigationContainer = styled.nav`
+export const NavigationList = styled.ul`
    display: flex;
    flex-direction: row;
    margin-right: 150px;
    font-size: 16px;
    font-weight: 600;
+   list-style: none;
    @media (max-width: 767px) {
     margin-left: auto;
     margin-right: auto;
@@ -75,7 +76,15 @@ export const NavigationContainer = styled.nav`
    }
 `;
 
-export const NavItem = styled(NavLink)`
+export const NavigationItem = styled.li`
+  flex-grow: 0;
+`;
+
+export const StyledLink = styled(NavLink).attrs(() => ({ activeClassName: "active"}))`
+   &.active {
+   border: 1px solid white;
+   border-radius: 29px;
+}
    color: white;
    width: 80px;
    height: 20px;
@@ -85,23 +94,8 @@ export const NavItem = styled(NavLink)`
    align-self: center;
    text-decoration: none;
    margin-right: 35px;
-
-   &.active {
-   border: 1px solid white;
-   border-radius: 29px;
-   }
    @media (max-width: 767px) {
     margin-right: 0;
    }
-`;
-
-export const Movies = styled(NavItem).attrs(() => ({
-   activeClassName: 'active',
-}))`
-   
-`;
-
-export const People = styled(Movies)`
-
 `;
 

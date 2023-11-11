@@ -4,10 +4,10 @@ import ExtrasHeader from "../ExtrasHeader";
 import {
     Container,
     Title,
-    Movies,
-    People,
     HeaderContainer,
-    NavigationContainer,
+    NavigationList,
+    NavigationItem,
+    StyledLink,
     TitleImg,
     TitleContainer,
 } from "./styled";
@@ -23,19 +23,23 @@ const Header = ({ setTheme }) => {
         <Container>
             <HeaderContainer>
                 <TitleContainer>
-                    <TitleImg><img src="images/video.png" /></TitleImg>
+                    <TitleImg><img src="images/Video.svg" /></TitleImg>
                     <Title>
                         Movies Browser
                     </Title>
                 </TitleContainer>
-                <NavigationContainer>
-                    <Movies activeClassName="active" to="/movies">
+                <NavigationList>
+                    <NavigationItem>
+                        <StyledLink activeClassName="active" to="/movies">
                         {moviesNavigation[language]}
-                    </Movies>
-                    <People activeClassName="active" to="/people">
+                        </StyledLink>
+                    </NavigationItem>
+                    <NavigationItem>
+                        <StyledLink activeClassName="active" to="/people">
                         {peopleNavigation[language]}
-                    </People>
-                </NavigationContainer>
+                        </StyledLink>
+                    </NavigationItem>
+                </NavigationList>
                 <SearchBar />
                 <ExtrasHeader setTheme={setTheme} />
             </HeaderContainer>
