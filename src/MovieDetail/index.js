@@ -39,20 +39,26 @@ import {
     MovieName,
     Job
 } from './styled';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCast, selectCrew, selectMovieDetails, selectMovieError, selectMovieLoading } from './movieSlice';
 import { fetchCredits, fetchMovie } from './apiMovie';
 import { selectLanguage } from '../LanguageSelect/languageSlice';
 import { companies, production, releaseDate, votes, castDetail, crewDetail } from '../language';
+import { useQueryParamater } from '../queryParameters';
+import searchQueryParamName from '../searchQueryParamName';
+import pageQueryParamName from '../pageQueryParamName';
 
 
 const MovieDetail = () => {
 
     const dispatch = useDispatch();
     const location = useLocation();
+    const navigate = useNavigate();
     const searchParams = new URLSearchParams(location.search)
     const movieId = searchParams.get('id');
+    const searchQuery = useQueryParamater(searchQueryParamName) || "";
+    const pageQuery = useQueryParamater(pageQueryParamName) || 1;
     const movie = useSelector((state) => selectMovieDetails(state));
     const cast = useSelector((state) => selectCast(state));
     const crew = useSelector((state) => selectCrew(state));
@@ -61,9 +67,13 @@ const MovieDetail = () => {
     const language = useSelector(selectLanguage);
 
     useEffect(() => {
-        dispatch(fetchMovie(movieId, language));
-        dispatch(fetchCredits(movieId, language));
-    }, [dispatch, movieId, language]);
+        if (searchQuery) {
+           navigate(`/movies?page=${pageQuery}&search=${searchQuery}`)
+        } else {
+            dispatch(fetchMovie(movieId, language, searchQuery, pageQuery));
+            dispatch(fetchCredits(movieId, language));
+        }
+    }, [dispatch, movieId, language, searchQuery, pageQuery]);
 
     if (isError) {
         return <Error />
