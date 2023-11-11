@@ -3,11 +3,11 @@ import LanguageSelect from '../LanguageSelect';
 import ToggleThemeButton from '../ToggleThemeButton';
 import { Container } from './styled';
 
-const ExtrasHeader = ({setTheme}) => {
+const ExtrasHeader = () => {
     return (
         <Container>
             <LanguageSelect />
-            <ToggleThemeButton setTheme={setTheme} />
+            <ToggleThemeButton />
         </Container>
     )
 }
