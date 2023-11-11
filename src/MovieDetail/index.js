@@ -48,6 +48,8 @@ import { companies, production, releaseDate, votes, castDetail, crewDetail } fro
 import { useQueryParamater } from '../queryParameters';
 import searchQueryParamName from '../searchQueryParamName';
 import pageQueryParamName from '../pageQueryParamName';
+import VideoImg from '../images/Video.svg';
+import ProfileImg from '../images/Profile.svg';
 
 
 const MovieDetail = () => {
@@ -87,7 +89,7 @@ const MovieDetail = () => {
                         <MainPoster
                             src={movie.backdrop_path
                                 ? `https://image.tmdb.org/t/p/original${movie.backdrop_path}`
-                                : 'images.Video.svg'
+                                : VideoImg
                             }
                         >
                             <TitleAndRating>
@@ -108,7 +110,7 @@ const MovieDetail = () => {
                     
                     <InfoBar >
                         <Details>
-                            <Poster src={movie.poster_path ? `https://image.tmdb.org/t/p/original${movie.poster_path}` : 'images/Video.svg'} />
+                            <Poster src={movie.poster_path ? `https://image.tmdb.org/t/p/original${movie.poster_path}` : VideoImg} />
                             <Informations>
                                 <Title>{movie.title}</Title>
                                 <Year>{movie.release_date ? movie.release_date.slice(0, 4) : ""}</Year>
@@ -152,7 +154,7 @@ const MovieDetail = () => {
                                             pathname: "/personDetail",
                                             search: `?id=${cast.id}`
                                         }}>
-                                            <Image><img src={cast.profile_path ? `https://image.tmdb.org/t/p/original${cast.profile_path}` : 'images/Profile.svg'} /></Image>
+                                            <Image><img src={cast.profile_path ? `https://image.tmdb.org/t/p/original${cast.profile_path}` : ProfileImg} /></Image>
                                             <RealName>{cast.name}</RealName>
                                             <MovieName>{cast.character}</MovieName>
                                         </Person>
@@ -166,7 +168,7 @@ const MovieDetail = () => {
                                 {crew.map((crew) => (
                                     <>
                                         <Person  >
-                                            <Image><img src={crew.profile_path ? `https://image.tmdb.org/t/p/original${crew.profile_path}` : 'images/Profile.svg'} /></Image>
+                                            <Image><img src={crew.profile_path ? `https://image.tmdb.org/t/p/original${crew.profile_path}` : ProfileImg} /></Image>
                                             <RealName>{crew.name}</RealName>
                                             <Job>{crew.job}</Job>
                                         </Person>

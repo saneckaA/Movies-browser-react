@@ -13,6 +13,7 @@ import { fetchPeople } from './apiPeople';
 import { selectPeopleByQuery, selectPeopleLoading, selectPeopleTotalPages, selectPeopleTotalResults } from './peopleSlice';
 import { selectLanguage } from '../LanguageSelect/languageSlice';
 import { popularPeople, searchResultsFor } from '../language';
+import ProfileImg from '../images/Profile.svg';
 
 const People = () => {
 
@@ -51,7 +52,7 @@ const People = () => {
                                         pathname: "/personDetail",
                                         search: `?id=${person.id}`
                                     }}>
-                                        <Image> <img src={person.profile_path ? `https://image.tmdb.org/t/p/original${person.profile_path}` : "images/Profile.svg"} /></Image>
+                                        <Image> <img src={person.profile_path ? `https://image.tmdb.org/t/p/original${person.profile_path}` : ProfileImg} /></Image>
                                         <Name>{person.name}</Name>
                                     </Person>
                                 </>

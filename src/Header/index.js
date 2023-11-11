@@ -14,6 +14,7 @@ import {
 import { useSelector } from "react-redux";
 import { selectLanguage } from "../LanguageSelect/languageSlice";
 import { moviesNavigation, peopleNavigation } from "../language";
+import VideoImg from '../images/Video.svg'
 
 const Header = ({ setTheme }) => {
 
@@ -23,7 +24,7 @@ const Header = ({ setTheme }) => {
         <Container>
             <HeaderContainer>
                 <TitleContainer>
-                    <TitleImg><img src="images/Video.svg" /></TitleImg>
+                    <TitleImg><img src={VideoImg}/></TitleImg>
                     <Title>
                         Movies Browser
                     </Title>

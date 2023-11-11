@@ -37,6 +37,8 @@ import { dateOfBirth, moviesCast, moviesCrew, placeOfBirth, votes } from '../lan
 import { useQueryParamater } from '../queryParameters';
 import searchQueryParamName from '../searchQueryParamName';
 import pageQueryParamName from '../pageQueryParamName';
+import ProfileImg from '../images/Profile.svg';
+import VideoImg from '../images/Video.svg';
 
 const PersonDetail = () => {
 
@@ -74,7 +76,7 @@ const PersonDetail = () => {
             {isLoading ? <Loading /> :
                 <>
                     <Details>
-                        <Image src={person.profile_path ? `https://image.tmdb.org/t/p/original${person.profile_path}` : 'images/Profile.svg'} />
+                        <Image src={person.profile_path ? `https://image.tmdb.org/t/p/original${person.profile_path}` : ProfileImg} />
                         <Information>
                             <Name>{person.name}</Name>
                             <Birth>
@@ -102,7 +104,7 @@ const PersonDetail = () => {
                                         pathname: "/movieDetail",
                                         search: `?id=${cast.id}`,
                                     }} >
-                                        <Poster><img src={cast.poster_path ? `https://image.tmdb.org/t/p/original${cast.poster_path}` : 'images/Video.svg'} /></Poster>
+                                        <Poster><img src={cast.poster_path ? `https://image.tmdb.org/t/p/original${cast.poster_path}` : VideoImg} /></Poster>
                                         <Description>
                                             <MovieTitle>{cast.title}</MovieTitle>
                                             <CharacterAndYear>{cast.character} ({cast.release_date.slice(0, 4)})</CharacterAndYear>
@@ -121,7 +123,6 @@ const PersonDetail = () => {
                                                 </Votes>
                                             </Rating>
                                         </Description>
-
                                     </Movie>
                                 </>
                             ))}
@@ -136,7 +137,7 @@ const PersonDetail = () => {
                                         pathname: "/movieDetail",
                                         search: `?id=${crew.id}`,
                                     }}>
-                                        <Poster><img src={crew.poster_path ? `https://image.tmdb.org/t/p/original${crew.poster_path}` : 'images/Video.svg'} /></Poster>
+                                        <Poster><img src={crew.poster_path ? `https://image.tmdb.org/t/p/original${crew.poster_path}` : VideoImg} /></Poster>
                                         <Description>
                                             <MovieTitle>{crew.title}</MovieTitle>
                                             <CharacterAndYear>{crew.job} ({crew.release_date.slice(0, 4)})</CharacterAndYear>

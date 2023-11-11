@@ -3,6 +3,7 @@ import { Container, Text, ImageContainer, Image } from './styled';
 import { useSelector } from 'react-redux';
 import { selectLanguage } from '../LanguageSelect/languageSlice';
 import { noResults } from '../language';
+import noResultsImg from '../images/no_results.svg'
 
 
 const NoResults = ({ searchQuery }) => {
@@ -15,7 +16,7 @@ const NoResults = ({ searchQuery }) => {
                 {noResults[language]} "{searchQuery}"
             </Text>
             <ImageContainer>
-                <Image src="images/no_results.svg" />
+                <Image src={noResultsImg} />
             </ImageContainer>
 
 

@@ -4,6 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectLanguage } from '../LanguageSelect/languageSlice';
 import { first, last, next, ofPage, page, prev } from '../language';
+import disbalePrevImg from '../images/disablePrev.svg';
+import PrevImg from '../images/prev.svg';
+import disableNextImg from '../images/disableNext.svg';
+import NextImg from '../images/next.svg';
 
 const Pagination = ({ currentPage, pageQueryParamName, totalPages, searchQueryParamName, searchQuery }) => {
 
@@ -31,12 +35,12 @@ const Pagination = ({ currentPage, pageQueryParamName, totalPages, searchQueryPa
     return (
         <PaginationContainer>
             <PagiButton onClick={onFirstButtonClick} disabled={disablePrev}>
-                <First src={disablePrev ? "images/disablePrev.svg" : "images/Prev.svg"} />
+                <First src={disablePrev ? disbalePrevImg : PrevImg} />
                 <Text>{first[language]}</Text>
-                <MobileFirst src={disablePrev ? "images/disablePrev.svg" : "images/Prev.svg"} />
+                <MobileFirst src={disablePrev ? disbalePrevImg : PrevImg} />
             </PagiButton>
             <PagiButton onClick={onPrevButtonClick} disabled={disablePrev}>
-                <Previous src={disablePrev ? "images/disablePrev.svg" : "images/Prev.svg"} />
+                <Previous src={disablePrev ? disbalePrevImg : PrevImg} />
                 <Text>{prev[language]}</Text>
             </PagiButton>
             <Pages>
@@ -44,12 +48,12 @@ const Pagination = ({ currentPage, pageQueryParamName, totalPages, searchQueryPa
             </Pages>
             <PagiButton onClick={onNextButtonClick} disabled={disableNext}>
                 <Text>{next[language]}</Text>
-                <Next src={disableNext ? "images/disableNext.svg" : "images/Next.svg"} />
+                <Next src={disableNext ? disableNextImg : NextImg} />
             </PagiButton>
             <PagiButton onClick={onLastButtonClick} disabled={disableNext}>
                 <Text>{last[language]}</Text>
-                <Last src={disableNext ? "images/disableNext.svg" : "images/Next.svg"} />
-                <MobileLast src={disableNext ? "images/disableNext.svg" : "images/Next.svg"} />
+                <Last src={disableNext ? disableNextImg : NextImg} />
+                <MobileLast src={disableNext ? disableNextImg : NextImg} />
             </PagiButton>
         </PaginationContainer>
     )
