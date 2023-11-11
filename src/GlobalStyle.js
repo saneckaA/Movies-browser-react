@@ -7,5 +7,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background: ${({theme}) => theme.backgroundColor};
   font-family: 'Poppins', sans-serif;
+  zoom: 80%;
 }
 `;
