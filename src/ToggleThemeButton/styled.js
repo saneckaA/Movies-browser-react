@@ -25,7 +25,7 @@ label:after {
    height: 45px;
    border-radius: 50%;
    position: absolute;
-   top: 2px;
+   top: 3px;
    left: 4px;
    background: linear-gradient(180deg, #ffcc89, #d8860b);
    box-shadow: 0px 5px 10px rgba(0,0,0,0.2);
