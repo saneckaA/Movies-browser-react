@@ -150,13 +150,14 @@ export const InfoBar = styled.div`
 
 export const Details = styled.div`
    background: ${({theme}) => theme.infoContainerColor};
-   width: 1368px;
+   width: 1268px;
    box-shadow: ${({theme}) => theme.boxShadowColor};
    display: flex;
    flex-direction: row;
    gap: 40px;
    border: 1px solid white;
    height: auto;
+   padding: 40px;
    @media (max-width: 1200px) {
    width: 100%;
   }
@@ -170,9 +171,6 @@ export const Details = styled.div`
 `;
 
 export const Poster = styled.img`
-   margin-top: 40px;
-   margin-left: 40px;
-   margin-bottom: 40px;
    background: ${({theme}) => theme.backgroundImage};
    height: 464px;
    height: 464px;
@@ -187,11 +185,8 @@ export const Poster = styled.img`
 `;
 
 export const Informations = styled.div`
-   width: 939px;
-   height: 464px;
-   margin-top: 40px;
-   margin-right: 40px;
-   margin-bottom: 40px;
+   width: auto;
+   height: auto;
    display: flex;
    flex-direction: column;
    gap: 20px;
