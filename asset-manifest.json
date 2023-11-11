@@ -1,12 +1,19 @@
 {
   "files": {
-    "main.js": "/Movies-browser-react/static/js/main.368d4252.js",
+    "main.js": "/Movies-browser-react/static/js/main.ca0a91c0.js",
     "static/js/787.cbf59cd9.chunk.js": "/Movies-browser-react/static/js/787.cbf59cd9.chunk.js",
+    "static/media/no_results.svg": "/Movies-browser-react/static/media/no_results.03778e104c236c2e6f3a37f0afbb2311.svg",
+    "static/media/Profile.svg": "/Movies-browser-react/static/media/Profile.ac1e5e6515cf09c8a0c6ba5078b6e687.svg",
     "index.html": "/Movies-browser-react/index.html",
-    "main.368d4252.js.map": "/Movies-browser-react/static/js/main.368d4252.js.map",
+    "static/media/next.svg": "/Movies-browser-react/static/media/next.65603aed25b92837780ced45707b8ca0.svg",
+    "static/media/disableNext.svg": "/Movies-browser-react/static/media/disableNext.6a785b2495124f74ea0f6fb14c1264dc.svg",
+    "static/media/Video.svg": "/Movies-browser-react/static/media/Video.88a352691d679e1db33ee3469ebd99c9.svg",
+    "static/media/prev.svg": "/Movies-browser-react/static/media/prev.16315223305bc3c0fcbc3a70d5db6801.svg",
+    "static/media/disablePrev.svg": "/Movies-browser-react/static/media/disablePrev.812e61d176f0c19d73692bf85676736c.svg",
+    "main.ca0a91c0.js.map": "/Movies-browser-react/static/js/main.ca0a91c0.js.map",
     "787.cbf59cd9.chunk.js.map": "/Movies-browser-react/static/js/787.cbf59cd9.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.368d4252.js"
+    "static/js/main.ca0a91c0.js"
   ]
 }
