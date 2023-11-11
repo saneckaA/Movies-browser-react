@@ -10,7 +10,7 @@
 
 ## Api
 The website gets data from an external Api:
-[](https://www.themoviedb.org/)
+[https://www.themoviedb.org/](https://www.themoviedb.org/)
 
 ## Used technologies:
 - HTML
