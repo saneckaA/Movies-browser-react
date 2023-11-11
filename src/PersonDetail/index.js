@@ -28,18 +28,24 @@ import {
     Average,
     Votes
 } from './styled';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCredits, fetchPerson } from './apiPerson';
 import { selectCast, selectCastLength, selectCrew, selectCrewLength, selectPersonDetails, selectPersonError, selectPersonLoading } from './personSlice';
 import { selectLanguage } from '../LanguageSelect/languageSlice';
 import { dateOfBirth, moviesCast, moviesCrew, placeOfBirth, votes } from '../language';
+import { useQueryParamater } from '../queryParameters';
+import searchQueryParamName from '../searchQueryParamName';
+import pageQueryParamName from '../pageQueryParamName';
 
 const PersonDetail = () => {
 
     const dispatch = useDispatch();
     const location = useLocation();
-    const searchParams = new URLSearchParams(location.search)
+    const navigate = useNavigate();
+    const searchParams = new URLSearchParams(location.search);
+    const searchQuery = useQueryParamater(searchQueryParamName) || "";
+    const pageQuery = useQueryParamater(pageQueryParamName) || 1;
     const personId = searchParams.get('id');
     const person = useSelector((state) => selectPersonDetails(state));
     const cast = useSelector((state) => selectCast(state));
@@ -51,9 +57,13 @@ const PersonDetail = () => {
     const language = useSelector(selectLanguage);
 
     useEffect(() => {
-        dispatch(fetchPerson(personId, language));
-        dispatch(fetchCredits(personId, language));
-    }, [dispatch, personId, language]);
+        if (searchQuery) {
+            navigate(`/people?page=${pageQuery}&search=${searchQuery}`)
+        } else {
+            dispatch(fetchPerson(personId, language, pageQuery, searchQuery));
+            dispatch(fetchCredits(personId, language));
+        }
+    }, [dispatch, personId, language, searchQuery, pageQuery]);
 
     if (isError) {
         return <Error />
